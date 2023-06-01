@@ -19,7 +19,8 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them.
 
 ```
-Examples
+https://desktop.github.com/
+Unity version 2021.3.24f1 (Rogue DTT version)
 ```
 
 ## Deployment
