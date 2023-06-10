@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SpawnAnt",
+                    "type": "Button",
+                    "id": "339e63c3-3894-4cd9-b3e8-0d58d414b56c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -75,6 +84,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Targeting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d400480a-5bcd-4681-9009-61e185caba3e",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpawnAnt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

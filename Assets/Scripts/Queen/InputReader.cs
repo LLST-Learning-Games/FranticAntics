@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,8 @@ namespace AntQueen
         private QueenControls controls;
         public Vector2 movement;
         public Vector2 target;
+
+        public Action spawnAnt;
 
         private void OnEnable()
         {
@@ -33,6 +36,14 @@ namespace AntQueen
         
             Debug.Log($"Target Vector: ({target.x},{target.y})");
         }
+
+        public void OnSpawnAnt(InputAction.CallbackContext context)
+        {
+            Debug.Log("spawn ant go now!");
+            spawnAnt?.Invoke();
+        }
+
+
         public void OnButtonTest(InputAction.CallbackContext context)
         {
             Debug.Log("you pressed w");

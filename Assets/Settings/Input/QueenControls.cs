@@ -53,6 +53,15 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SpawnAnt"",
+                    ""type"": ""Button"",
+                    ""id"": ""339e63c3-3894-4cd9-b3e8-0d58d414b56c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -99,6 +108,17 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
                     ""action"": ""Targeting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d400480a-5bcd-4681-9009-61e185caba3e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SpawnAnt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_ButtonTest = m_Controls.FindAction("ButtonTest", throwIfNotFound: true);
         m_Controls_Targeting = m_Controls.FindAction("Targeting", throwIfNotFound: true);
+        m_Controls_SpawnAnt = m_Controls.FindAction("SpawnAnt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_ButtonTest;
     private readonly InputAction m_Controls_Targeting;
+    private readonly InputAction m_Controls_SpawnAnt;
     public struct ControlsActions
     {
         private @QueenControls m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @ButtonTest => m_Wrapper.m_Controls_ButtonTest;
         public InputAction @Targeting => m_Wrapper.m_Controls_Targeting;
+        public InputAction @SpawnAnt => m_Wrapper.m_Controls_SpawnAnt;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
             @Targeting.started += instance.OnTargeting;
             @Targeting.performed += instance.OnTargeting;
             @Targeting.canceled += instance.OnTargeting;
+            @SpawnAnt.started += instance.OnSpawnAnt;
+            @SpawnAnt.performed += instance.OnSpawnAnt;
+            @SpawnAnt.canceled += instance.OnSpawnAnt;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -245,6 +271,9 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
             @Targeting.started -= instance.OnTargeting;
             @Targeting.performed -= instance.OnTargeting;
             @Targeting.canceled -= instance.OnTargeting;
+            @SpawnAnt.started -= instance.OnSpawnAnt;
+            @SpawnAnt.performed -= instance.OnSpawnAnt;
+            @SpawnAnt.canceled -= instance.OnSpawnAnt;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -285,5 +314,6 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnButtonTest(InputAction.CallbackContext context);
         void OnTargeting(InputAction.CallbackContext context);
+        void OnSpawnAnt(InputAction.CallbackContext context);
     }
 }
