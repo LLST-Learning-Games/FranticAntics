@@ -4,6 +4,7 @@ namespace Worker
     {
         Idle,
         CollectFood,
-        Defense
+        Defense,
+        Attack
     }
 }

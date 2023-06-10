@@ -6,16 +6,29 @@ namespace Worker
 {
     public class WorkerAntManager : MonoBehaviour
     {
-        public static WorkerAntManager Instance;
+        private static WorkerAntManager _instance;
+
+        public static WorkerAntManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = FindObjectOfType<WorkerAntManager>();
+
+                return _instance;
+            }
+        }
 
         [SerializeField] private List<WorkerAntController> _allWorkerAnts;
 
-        private void Awake()
+        public void Whistle()
         {
-            Instance = this;
-
-            _allWorkerAnts = new();
+            foreach (var workerAntController in _allWorkerAnts)
+            {
+                workerAntController.Whistle();
+            }
         }
+
 
         public void RegisterWorkerAnt(WorkerAntController workerAntController)
         {
