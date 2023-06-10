@@ -26,6 +26,9 @@ namespace Worker
         {
             if(Input.GetKeyDown(KeyCode.Space))
                 SendForSearch();
+            
+            if(Input.GetKeyDown(KeyCode.D))
+                Whistle();
         }
 
         public void Whistle()
