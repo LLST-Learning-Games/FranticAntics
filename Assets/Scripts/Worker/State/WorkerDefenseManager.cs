@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,18 +37,21 @@ namespace Worker.State
                 return;
 
             var tempObject = new GameObject("temp");
-            var angle = 360 / _defenceAnts.Count;
+            var angle = 360 / (_defenceAnts.Count > 6 ? 6 : _defenceAnts.Count);
 
             tempObject.transform.position = _queen.position;
             tempObject.transform.eulerAngles = _queen.eulerAngles;
 
+            var index = 0;
             foreach (var antController in _defenceAnts)
             {
                 if(antController.GetCurrentStateController() is not WorkerDefenceState defenceState)
                     continue;
 
-                defenceState.DefencePositionOffset = tempObject.transform.forward.normalized;
+                defenceState.DefencePositionOffset = tempObject.transform.forward.normalized * ((index / 6) + 1);
                 tempObject.transform.eulerAngles += new Vector3(0, angle, 0);
+
+                index++;
             }
             
             Destroy(tempObject);

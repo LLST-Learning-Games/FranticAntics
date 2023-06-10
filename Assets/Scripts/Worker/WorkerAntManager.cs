@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Worker.State;
 
@@ -8,19 +6,6 @@ namespace Worker
 {
     public class WorkerAntManager : MonoBehaviour
     {
-        private static WorkerAntManager _instance;
-
-        public static WorkerAntManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = FindObjectOfType<WorkerAntManager>();
-
-                return _instance;
-            }
-        }
-
         public WorkerDefenseManager DefenseManager;
         [SerializeField] private List<WorkerAntController> _allWorkerAnts;
 

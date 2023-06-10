@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Team;
 using UnityEngine;
 using Worker.State;
 
@@ -8,6 +9,8 @@ namespace Worker
 {
     public class WorkerAntController : MonoBehaviour
     {
+        public TeamController TeamController;
+        
         [SerializeField] protected WorkerAntMovement _antMovement;
         [SerializeField] private WorkerAntStatistics _antStatistics;
         public Transform Queen;
@@ -32,13 +35,13 @@ namespace Worker
                 stateController.Value.Initialize(this);
             }
             
-            WorkerAntManager.Instance.RegisterWorkerAnt(this);
+            TeamController.WorkerAntManager.RegisterWorkerAnt(this);
         }
 
         private void OnDestroy()
         {
-            if(WorkerAntManager.Instance != null)
-                WorkerAntManager.Instance.RemoveWorkerAnt(this);
+            if(TeamController.WorkerAntManager != null)
+                TeamController.WorkerAntManager.RemoveWorkerAnt(this);
         }
 
         private void Update()
@@ -51,7 +54,7 @@ namespace Worker
             if(Queen == null)
                 return;
             
-            WorkerAntManager.Instance.DefenseManager.AddAntToDefense(this);
+            TeamController.WorkerAntManager.DefenseManager.AddAntToDefense(this);
             
             ChangeState(WorkerAntStatus.Defense);
             var defenceState = GetCurrentStateController() as WorkerDefenceState;
