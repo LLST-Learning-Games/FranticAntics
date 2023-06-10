@@ -25,7 +25,8 @@ namespace Worker
         {
             _antMovement.Initialize(this);
             
-            _allStateControllers.Add(WorkerAntStatus.Defense, gameObject.AddComponent<WorkerDefenceState>());
+            _allStateControllers.Add(WorkerAntStatus.Defense, GetComponent<WorkerDefenceState>());
+            _allStateControllers.Add(WorkerAntStatus.SearchFood, GetComponent<WorkerSearchState>());
 
             foreach (var stateController in _allStateControllers)
             {
@@ -54,13 +55,18 @@ namespace Worker
             ChangeState(WorkerAntStatus.Defense);
         }
 
-        private void ChangeState(WorkerAntStatus newState)
+        public void SendSearch()
+        {
+            ChangeState(WorkerAntStatus.SearchFood);
+        }
+        
+        public void ChangeState(WorkerAntStatus newState)
         {
             if(_allStateControllers.ContainsKey(Status))
                 _allStateControllers[Status]?.Deactivate();
             
-            if(_allStateControllers.ContainsKey(WorkerAntStatus.Defense))
-                _allStateControllers[WorkerAntStatus.Defense]?.Activate();   
+            if(_allStateControllers.ContainsKey(newState))
+                _allStateControllers[newState]?.Activate();   
         }
         
         public bool SetDestination(Vector3 destination, Action<WorkerAntController> onPathCompleted)

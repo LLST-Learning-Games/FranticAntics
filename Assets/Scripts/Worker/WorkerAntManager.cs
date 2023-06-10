@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Worker
@@ -21,12 +22,26 @@ namespace Worker
 
         [SerializeField] private List<WorkerAntController> _allWorkerAnts;
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+                SendForSearch();
+        }
+
         public void Whistle()
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
                 workerAntController.Whistle();
             }
+        }
+
+        public void SendForSearch()
+        {
+            var availableAnt = _allWorkerAnts.FirstOrDefault(x => x.Status != WorkerAntStatus.SearchFood);
+            
+            if(availableAnt != null)
+                availableAnt.SendSearch();
         }
 
 
