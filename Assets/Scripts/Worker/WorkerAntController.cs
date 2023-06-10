@@ -28,6 +28,7 @@ namespace Worker
             
             _allStateControllers.Add(WorkerAntStatus.Defense, GetComponent<WorkerDefenceState>());
             _allStateControllers.Add(WorkerAntStatus.SearchFood, GetComponent<WorkerSearchState>());
+            _allStateControllers.Add(WorkerAntStatus.CollectFood, GetComponent<WorkerCollectState>());
 
             foreach (var stateController in _allStateControllers)
             {
