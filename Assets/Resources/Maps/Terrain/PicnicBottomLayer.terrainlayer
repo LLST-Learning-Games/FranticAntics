@@ -6,7 +6,7 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BottomPinicLayer
+  m_Name: PicnicBottomLayer
   m_DiffuseTexture: {fileID: 2800000, guid: 845e02c9a153cfd438d35985a49c89b3, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
