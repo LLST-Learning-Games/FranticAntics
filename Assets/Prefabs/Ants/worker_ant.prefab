@@ -941,6 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221361b27e76e8f4cb381af5abeb87fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 2768702229430445445}
   _defaultHp: 3
   _defaultMovementSpeed: 2
   _defaultAttackPower: 1
