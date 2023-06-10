@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Worker.State
 {
     public class WorkerDefenceState : WorkerStateBase
     {
-        private Vector3 _defencePositionOffset;
+        public Vector3 DefencePositionOffset;
         [SerializeField] private float _defenseRange = 1f;
         
         public override void Activate()
@@ -14,20 +15,18 @@ namespace Worker.State
             base.Activate();
             
             _workerAntController.Status = WorkerAntStatus.Defense;
-
-            _defencePositionOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         }
 
         protected override void UpdateState()
         {
             base.UpdateState();
 
-            _workerAntController.SetDestination(GetDefensePosition(), null);
+            _workerAntController.SetDestination(GetDefensePosition());
         }
 
         private Vector3 GetDefensePosition()
         {
-            return _workerAntController.Queen.position + _defencePositionOffset * _defenseRange;
+            return _workerAntController.Queen.position + DefencePositionOffset * _defenseRange;
         }
         
         

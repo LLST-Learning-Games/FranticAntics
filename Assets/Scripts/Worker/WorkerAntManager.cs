@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Worker.State;
 
 namespace Worker
 {
@@ -20,6 +21,7 @@ namespace Worker
             }
         }
 
+        public WorkerDefenseManager DefenseManager;
         [SerializeField] private List<WorkerAntController> _allWorkerAnts;
 
         private void Update()
@@ -35,16 +37,19 @@ namespace Worker
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
-                workerAntController.Whistle();
+                workerAntController.Whistle(Vector3.zero);
             }
         }
 
         public void SendForSearch()
         {
-            var availableAnt = _allWorkerAnts.FirstOrDefault(x => x.Status != WorkerAntStatus.SearchFood);
+            var availableAnt = DefenseManager.GetAnt();
             
             if(availableAnt != null)
+            {
+                DefenseManager.RemoveAntFromDefense(availableAnt);
                 availableAnt.SendSearch();
+            }
         }
 
 

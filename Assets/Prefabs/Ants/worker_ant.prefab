@@ -891,7 +891,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300000
-  m_StoppingDistance: 0.7
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -911,6 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60573449ff2e4414be23ad5f725f8498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DefencePositionOffset: {x: 0, y: 0, z: 0}
   _defenseRange: 1
 --- !u!114 &9013007582280170069
 MonoBehaviour:
@@ -924,6 +925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f316ec023ed4a26a5ae63d930bb41a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _searchIdleTime: 2
+  _searchDistance: 10
 --- !u!1 &5963606637951279541
 GameObject:
   m_ObjectHideFlags: 0

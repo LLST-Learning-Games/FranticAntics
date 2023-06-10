@@ -21,7 +21,7 @@ namespace Worker.State
             
             var queen = _workerAntController.Queen;
             _searchPosition = queen.position + queen.forward.normalized * _searchDistance;
-            _workerAntController.SetDestination(_searchPosition, null);
+            _workerAntController.SetDestination(_searchPosition);
         }
 
         public override void Deactivate()
@@ -43,7 +43,7 @@ namespace Worker.State
         {
             _waitingDelayTween = DOVirtual.DelayedCall(_searchIdleTime, () =>
             {
-                _workerAntController.ChangeState(WorkerAntStatus.Defense);
+                _workerAntController.Whistle(Vector3.zero);
             });
         }
     }
