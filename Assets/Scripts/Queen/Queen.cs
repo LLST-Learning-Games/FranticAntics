@@ -10,6 +10,7 @@ namespace  AntQueen
     {
 
         [SerializeField] private InputReader _queenInput;
+        [SerializeField] private Transform targetObject;
 
         [SerializeField] private float _speed;
         void Start()
@@ -27,6 +28,9 @@ namespace  AntQueen
         { 
             Vector3 movement = new Vector3(_queenInput.movement.x, 0, _queenInput.movement.y);
             transform.Translate(movement * Time.deltaTime * _speed);
+            
+            Vector3 target = new Vector3(_queenInput.target.x, 0, _queenInput.target.y);
+            targetObject.transform.SetLocalPositionAndRotation(target * 3f, Quaternion.identity);
         }
     }   
 }
