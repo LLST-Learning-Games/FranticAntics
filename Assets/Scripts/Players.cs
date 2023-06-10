@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Player
 {
-    playerOne,
-    playerTwo,
+    Neutral,
+    PlayerOne,
+    PlayerTwo,
 }
