@@ -27,6 +27,7 @@ public class SpawnPointManager : MonoBehaviour
             SpawnPoint newSpawn = Instantiate(SpawnPrefab);
             newSpawn.transform.parent = transform;
             newSpawn.Initialize(spawnPointData);
+            newSpawn.gameObject.name = spawnPointData.name;
         }
     }
 

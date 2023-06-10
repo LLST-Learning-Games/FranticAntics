@@ -6,4 +6,6 @@ using UnityEngine;
 public class LevelSpawnData : ScriptableObject
 {
     public List<SpawnPointData> LevelSpawnPoints;
+    public List<GameObject> ObstaclePrefabs;
+    public List<GameObject> PowerupPrefabs;
 }

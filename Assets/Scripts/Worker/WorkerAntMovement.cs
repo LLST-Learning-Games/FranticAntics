@@ -64,16 +64,12 @@ namespace Worker
         {
             Debug.Log("[WorkerAntController] Ant stopped");
             StartRandomIdleAnimation();
-            
-            _workerAntController.OnPathStarted?.Invoke(_workerAntController);
         }
 
         public virtual void AntPathCompleted()
         {
             Debug.Log("[WorkerAntController] Ant started moving");
             PlayMovementAnimation();
-            
-            _workerAntController.OnPathCompleted?.Invoke(_workerAntController);
         }
     }
 }

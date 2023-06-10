@@ -11,14 +11,17 @@ namespace Worker.State
         [SerializeField] private float _searchDistance = 10f;
 
         private Tween _waitingDelayTween;
+        private Vector3 _searchPosition;
         
         public override void Activate()
         {
             base.Activate();
 
+            _workerAntController.Status = WorkerAntStatus.SearchFood;
+            
             var queen = _workerAntController.Queen;
-            var searchPosition = queen.position + queen.forward.normalized * _searchDistance;
-            _workerAntController.SetDestination(searchPosition, OnPathCompleted);
+            _searchPosition = queen.position + queen.forward.normalized * _searchDistance;
+            _workerAntController.SetDestination(_searchPosition);
         }
 
         public override void Deactivate()
@@ -28,13 +31,19 @@ namespace Worker.State
             _waitingDelayTween?.Kill();
         }
 
-        private void OnPathCompleted(WorkerAntController _)
+        protected override void UpdateState()
         {
-            _workerAntController.OnPathCompleted -= OnPathCompleted;
+            base.UpdateState();
+            
+            if(Vector3.Distance(_searchPosition, transform.position) <= 1)
+                OnPathCompleted();
+        }
 
+        private void OnPathCompleted()
+        {
             _waitingDelayTween = DOVirtual.DelayedCall(_searchIdleTime, () =>
             {
-                _workerAntController.ChangeState(WorkerAntStatus.Defense);
+                _workerAntController.Whistle(Vector3.zero);
             });
         }
     }
