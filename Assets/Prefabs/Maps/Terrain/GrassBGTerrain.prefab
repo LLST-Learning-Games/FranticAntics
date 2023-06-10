@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7591534790055372065}
   - component: {fileID: 724766635724310083}
   m_Layer: 0
-  m_Name: GrassTerrain
+  m_Name: GrassBGTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Terrain:
   m_GameObject: {fileID: 8788944610563769942}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 9b3fbaf2cbcdde64bbcb30813a61a64c, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: f05059fccd4f06e4cb93f5420fd91f92, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -76,5 +76,5 @@ TerrainCollider:
   m_GameObject: {fileID: 8788944610563769942}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 9b3fbaf2cbcdde64bbcb30813a61a64c, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: f05059fccd4f06e4cb93f5420fd91f92, type: 2}
   m_EnableTreeColliders: 0
