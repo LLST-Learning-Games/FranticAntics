@@ -22,13 +22,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Targeting",
+                    "type": "Value",
+                    "id": "b50639ad-8222-4754-84cf-731590de13af",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "578b6b49-12c8-46da-9e94-4c727a2768ed",
-                    "path": "<Gamepad>/dpad",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -55,6 +64,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "ButtonTest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5195a206-7e75-41e8-b5f3-22313510994d",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Targeting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

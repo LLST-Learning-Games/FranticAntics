@@ -796,6 +796,7 @@ GameObject:
   - component: {fileID: 4617943622011078191}
   - component: {fileID: 5160142469793065150}
   - component: {fileID: 2768702229430445444}
+  - component: {fileID: 5999120274337963013}
   - component: {fileID: 2768702229430445445}
   m_Layer: 0
   m_Name: worker_ant
@@ -854,9 +855,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c42b781e50b4ca8b226246b9774a95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 5160142469793065150}
+  _antMovement: {fileID: 5999120274337963013}
+  Status: 0
+--- !u!114 &5999120274337963013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5430756129966660757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1ba3f957094d09a6d8e270bbd5a864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _navMeshTarget: {fileID: 0}
   _navMeshAgent: {fileID: 2768702229430445445}
+  _animator: {fileID: 5160142469793065150}
+  IsStopped: 0
+  IsIdle: 0
 --- !u!195 &2768702229430445445
 NavMeshAgent:
   m_ObjectHideFlags: 0

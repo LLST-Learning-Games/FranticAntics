@@ -1,89 +1,73 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
+using Worker.State;
 
 namespace Worker
 {
     public class WorkerAntController : MonoBehaviour
     {
-        [SerializeField] protected Animator _animator;
+        [SerializeField] protected WorkerAntMovement _antMovement;
+        public Transform Queen;
 
-        [Header("AI")]
-        [SerializeField] protected Transform _navMeshTarget;
-        [SerializeField] protected NavMeshAgent _navMeshAgent;
-
-        private bool _isStopped;
-        private bool _isIdle;
+        public WorkerAntStatus Status;
+        
+        private bool _isStopped => _antMovement.IsStopped;
+        private bool _isIdle => _antMovement.IsIdle;
 
         public Action<WorkerAntController> OnPathStarted;
         public Action<WorkerAntController> OnPathCompleted;
 
-        private void Start()
+        private Dictionary<WorkerAntStatus, WorkerStateBase> _allStateControllers = new();
+
+        private void Awake()
         {
+            _antMovement.Initialize(this);
+            
+            _allStateControllers.Add(WorkerAntStatus.Defense, gameObject.AddComponent<WorkerDefenceState>());
+
+            foreach (var stateController in _allStateControllers)
+            {
+                stateController.Value.Initialize(this);
+            }
+            
+            WorkerAntManager.Instance.RegisterWorkerAnt(this);
+        }
+
+        private void OnDestroy()
+        {
+            if(WorkerAntManager.Instance != null)
+                WorkerAntManager.Instance.RemoveWorkerAnt(this);
         }
 
         private void Update()
         {
-            SetDestination(null);
-
-            ProcessAntMovement();
+            _antMovement.ProcessAntMovement();
         }
 
-        private void ProcessAntMovement()
+        public void Whistle()
         {
-            if(_navMeshAgent.path == null)
+            if(Queen == null)
                 return;
-
-            // if the ant stopped play idle animation
-            if (_navMeshAgent.velocity == Vector3.zero && !_isIdle)
-            {
-                AntPathStarted();
-                return;
-            }
-
-            if (_navMeshAgent.velocity != Vector3.zero && _isStopped)
-            {
-                AntPathCompleted();
-            }
+            
+            ChangeState(WorkerAntStatus.Defense);
         }
 
-        private void StartRandomIdleAnimation()
+        private void ChangeState(WorkerAntStatus newState)
         {
-            _animator.SetTrigger("idle_" + Random.Range(0,3));
-            _isIdle = true;
-            _isStopped = true;
+            if(_allStateControllers.ContainsKey(Status))
+                _allStateControllers[Status]?.Deactivate();
+            
+            if(_allStateControllers.ContainsKey(WorkerAntStatus.Defense))
+                _allStateControllers[WorkerAntStatus.Defense]?.Activate();   
         }
-
-        private void PlayMovementAnimation()
+        
+        public bool SetDestination(Vector3 destination, Action<WorkerAntController> onPathCompleted)
         {
-            _animator.SetTrigger("walk");
-            _isIdle = false;
-            _isStopped = false;
-        }
-
-        public bool SetDestination(Action<WorkerAntController> onPathCompleted)
-        {
-            var result = _navMeshAgent.SetDestination(_navMeshTarget.position);
             OnPathCompleted += onPathCompleted;
             
-            return result;
-        }
-
-        public virtual void AntPathStarted()
-        {
-            Debug.Log("[WorkerAntController] Ant stopped");
-            StartRandomIdleAnimation();
-            
-            OnPathStarted?.Invoke(this);
-        }
-
-        public virtual void AntPathCompleted()
-        {
-            Debug.Log("[WorkerAntController] Ant started moving");
-            PlayMovementAnimation();
-            
-            OnPathCompleted?.Invoke(this);
+            return _antMovement.SetDestination(destination);
         }
     }
 }

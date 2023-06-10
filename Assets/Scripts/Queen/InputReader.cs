@@ -4,12 +4,11 @@ using UnityEngine.InputSystem;
 namespace AntQueen
 {
     
-
-    
     public class InputReader : MonoBehaviour, QueenControls.IControlsActions
     {
-        
         private QueenControls controls;
+        public Vector2 movement;
+        public Vector2 target;
 
         private void OnEnable()
         {
@@ -23,17 +22,21 @@ namespace AntQueen
         
         public void OnMovement(InputAction.CallbackContext context)
         {
-            //Vector2 pos = Gamepad.current.leftStick.ReadValue();
-            Vector2 pos = context.ReadValue<Vector2>();
+            movement= context.ReadValue<Vector2>();
         
-            Debug.Log($"({pos.x},{pos.y})");
+            Debug.Log($"Movement Vector: ({movement.x},{movement.y})");
         }
 
+        public void OnTargeting(InputAction.CallbackContext context)
+        {
+            target = context.ReadValue<Vector2>();
+        
+            Debug.Log($"Target Vector: ({target.x},{target.y})");
+        }
         public void OnButtonTest(InputAction.CallbackContext context)
         {
             Debug.Log("you pressed w");
         }
-        
-        
+
     }
 }
