@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace  AntQueen
 {
@@ -11,24 +6,29 @@ namespace  AntQueen
     {
         [SerializeField] private int _playerNumber;
         [SerializeField] private Transform _targetObject;
-        [SerializeField] private float _targetDistance;
-        [SerializeField] private float _speed;
+        [SerializeField] private Transform _playerModel;
+        [SerializeField] private float _targetDistance = 1f;
+        [SerializeField] private float _speed = 2f;
+        [SerializeField] private float _spawnTriggerThreshold = 0.5f;
 
         [SerializeField] private GameObject _antPrefab;
 
         [SerializeField] private Animator _animator;
+        [SerializeField] private float _antSpawnCooldownTime = 0.5f;
+
+        private float _antSpawnCooldown;
         
         void Start()
         {
-            //_queenInput.spawnAnt += OnSpawnAnt;
+            UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+            _antSpawnCooldown = _antSpawnCooldownTime;
         }
 
         void Update() 
         {
-        //     Debug.Log("1: " + GetController("Left", 0));
-        //     Debug.Log("2: " + GetController("Left", 1));
             HandleMovement();
             HandleTarget();
+            HandleSpawnAnt();
         }
 
         private void HandleMovement()
@@ -36,7 +36,14 @@ namespace  AntQueen
             var leftInput = GetController("Left", _playerNumber);
             Vector3 movement = new Vector3(leftInput.x, 0, leftInput.y);
             transform.Translate(movement * Time.deltaTime * _speed);
-            //transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (movement), Time.deltaTime * 40f);
+        
+            if(movement != Vector3.zero)
+            {
+                _playerModel.rotation = Quaternion.Slerp(
+                    _playerModel.rotation, 
+                    Quaternion.LookRotation(movement),
+                    Time.deltaTime * 40f);
+            }
             _animator.speed = movement.magnitude * _speed;
         }
 
@@ -47,6 +54,32 @@ namespace  AntQueen
             _targetObject.transform.SetLocalPositionAndRotation(target * _targetDistance, Quaternion.identity);
         }
 
+
+        public void HandleSpawnAnt()
+        {
+            if(_antSpawnCooldown < 0 && GetTrigger(_playerNumber) > _spawnTriggerThreshold)
+            {
+                Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
+                _antSpawnCooldown = _antSpawnCooldownTime;
+            }
+
+            _antSpawnCooldown -= Time.deltaTime;
+        }
+
+        private Vector2 GetController(string stick, int controller)
+        {
+            return new Vector2(
+                Input.GetAxis($"Horizontal-{stick}-{controller}"),
+                Input.GetAxis($"Vertical-{stick}-{controller}")
+            );
+        }
+
+        private float GetTrigger(int controller)
+        {
+            return Input.GetAxis($"Trigger-Right-{controller}");
+        }
+        
+        
         private void HandleMovementNewInput()
         { 
             //Vector3 movement = new Vector3(_queenInput.movement.x, 0, _queenInput.movement.y);
@@ -56,19 +89,6 @@ namespace  AntQueen
             
             //Vector3 target = new Vector3(_queenInput.target.x, 0, _queenInput.target.y);
             //_targetObject.transform.SetLocalPositionAndRotation(target * _targetDistance, Quaternion.identity);
-        }
-
-        public void OnSpawnAnt()
-        {
-            Instantiate(_antPrefab,_targetObject.transform.position,Quaternion.identity);
-        }
-
-        private Vector2 GetController(string stick, int controller)
-        {
-            return new Vector2(
-                Input.GetAxis($"Horizontal-{stick}-{controller}"),
-                Input.GetAxis($"Vertical-{stick}-{controller}")
-            );
         }
     }   
 }

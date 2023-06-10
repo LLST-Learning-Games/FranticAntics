@@ -323,8 +323,23 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
+      propertyPath: _playerModel
+      value: 
+      objectReference: {fileID: 356077732}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
       propertyPath: _playerNumber
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: _antSpawnCooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: _spawnTriggerThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338275, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
@@ -369,9 +384,21 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 356077730}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &356077732 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7926614702899804919, guid: b9e646c5d2fb348739efd06265c59e9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 356077730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1022292580 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7604969460104979197, guid: b9e646c5d2fb348739efd06265c59e9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3103364781201547459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2033881773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7926614702899804919, guid: b9e646c5d2fb348739efd06265c59e9a,
     type: 3}
   m_PrefabInstance: {fileID: 3103364781201547459}
   m_PrefabAsset: {fileID: 0}
@@ -576,6 +603,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5430756129966660757, guid: cb6b3c5817468472b8988b577b54beb5,
         type: 3}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: _playerModel
+      value: 
+      objectReference: {fileID: 2033881773}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: _antSpawnCooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103364779128338274, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: _spawnTriggerThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338275, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
       propertyPath: m_Name
