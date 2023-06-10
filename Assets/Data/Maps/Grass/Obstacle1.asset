@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d2375c8645a41b09858761e949326fe, type: 3}
-  m_Name: Obstacle4
+  m_Name: Obstacle1
   m_EditorClassIdentifier: 
-  MapPosition: {x: 81.64469, y: 0, z: 20}
+  MapPosition: {x: 36, y: 0, z: 20}
   Type: 1
-  PrefabOverride: {fileID: 2300756144372489342, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
-    type: 3}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fdbbc9f909548e1955d0cb1b8693720, type: 3}
-  m_Name: PicnicData
+  m_Name: GrassData
   m_EditorClassIdentifier: 
   LevelSpawnPoints:
   - {fileID: 11400000, guid: 2f2a2de35c84dfd4582cf509650886a2, type: 2}
