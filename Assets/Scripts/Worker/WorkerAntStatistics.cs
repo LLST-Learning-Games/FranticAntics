@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Worker
 {
@@ -6,10 +7,10 @@ namespace Worker
     public class WorkerAntStatistics : MonoBehaviour
     {
         private WorkerAntController _workerAntController;
-        
+        [SerializeField] protected NavMeshAgent _navMeshAgent;
+
         [SerializeField][Range(1, 10)] private int _defaultHp = 3;
-        
-        [SerializeField][Range(0, 10)] private float _defaultMovementSpeed = 2;
+        [SerializeField][Range(0, 5)] private float _defaultMovementSpeed = 2;
         [SerializeField][Range(1, 10)] private int _defaultAttackPower = 1;
         
         private int _hp = 3;
@@ -45,6 +46,12 @@ namespace Worker
             {
                 _workerAntController.Die();
             }
+        }
+
+        public void SetMovementSpeed(float movementSpeed)
+        {
+            _movementSpeed = movementSpeed;
+            _navMeshAgent.speed = _movementSpeed;
         }
     }
 }
