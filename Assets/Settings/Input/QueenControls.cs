@@ -50,7 +50,7 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""578b6b49-12c8-46da-9e94-4c727a2768ed"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -90,6 +90,16 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<WebGLGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<XboxOneGamepadAndroid>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<XboxOneGampadiOS>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
