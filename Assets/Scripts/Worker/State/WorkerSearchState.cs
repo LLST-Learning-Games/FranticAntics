@@ -19,8 +19,8 @@ namespace Worker.State
 
             _workerAntController.Status = WorkerAntStatus.SearchFood;
             
-            var queen = _workerAntController.Queen;
-            _searchPosition = queen.position + queen.forward.normalized * _searchDistance;
+            var queen = _workerAntController.TeamController.Queen;
+            _searchPosition = queen.transform.position + queen.GetForward().normalized * _searchDistance;
             _workerAntController.SetDestination(_searchPosition);
         }
 

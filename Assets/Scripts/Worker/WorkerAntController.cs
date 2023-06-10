@@ -13,7 +13,6 @@ namespace Worker
         
         [SerializeField] protected WorkerAntMovement _antMovement;
         [SerializeField] private WorkerAntStatistics _antStatistics;
-        public Transform Queen;
 
         public WorkerAntStatus Status;
         
@@ -22,7 +21,7 @@ namespace Worker
 
         private Dictionary<WorkerAntStatus, WorkerStateBase> _allStateControllers = new();
 
-        private void Awake()
+        public void Initialize()
         {
             _antMovement.Initialize(this);
             _antStatistics.Initialize(this);
@@ -36,6 +35,8 @@ namespace Worker
             }
             
             TeamController.WorkerAntManager.RegisterWorkerAnt(this);
+            
+            Whistle(Vector3.zero);
         }
 
         private void OnDestroy()
@@ -51,7 +52,7 @@ namespace Worker
 
         public void Whistle(Vector3 defenceOffset)
         {
-            if(Queen == null)
+            if(TeamController.Queen == null)
                 return;
             
             TeamController.WorkerAntManager.DefenseManager.AddAntToDefense(this);

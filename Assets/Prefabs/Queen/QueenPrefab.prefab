@@ -48,11 +48,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ff76478ebab4615adbb95b7b9087e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _queenInput: {fileID: 3103364779128338272}
+  TeamController: {fileID: 0}
+  _playerNumber: 0
   _targetObject: {fileID: 3103364781115182426}
+  _playerModel: {fileID: 7926614702899804919}
   _targetDistance: 1
   _speed: 10
-  _antPrefab: {fileID: 0}
+  _spawnTriggerThreshold: 0.5
+  _antPrefab: {fileID: 2768702229430445444, guid: cb6b3c5817468472b8988b577b54beb5,
+    type: 3}
+  _animator: {fileID: 7604969460104979197}
+  _antSpawnCooldownTime: 0.5
 --- !u!114 &3103364779128338272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,17 +287,17 @@ PrefabInstance:
     - target: {fileID: 5295049150727560550, guid: 963d01983609e46fbb6df9b3983be086,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.809
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5295049150727560550, guid: 963d01983609e46fbb6df9b3983be086,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.073732
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5295049150727560550, guid: 963d01983609e46fbb6df9b3983be086,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2529
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5295049150727560550, guid: 963d01983609e46fbb6df9b3983be086,
         type: 3}
@@ -330,6 +336,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963d01983609e46fbb6df9b3983be086, type: 3}
+--- !u!95 &7604969460104979197 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5688453530548094316, guid: 963d01983609e46fbb6df9b3983be086,
+    type: 3}
+  m_PrefabInstance: {fileID: 2844926098693859217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7926614702899804919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5295049150727560550, guid: 963d01983609e46fbb6df9b3983be086,

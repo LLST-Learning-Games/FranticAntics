@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Team;
 using UnityEngine;
 
 namespace Worker.State
 {
     public class WorkerDefenseManager : MonoBehaviour
     {
-        [SerializeField] private Transform _queen;
+        [SerializeField] private TeamController _teamController;
         [SerializeField] private List<WorkerAntController> _defenceAnts;
 
         public void AddAntToDefense(WorkerAntController workerAntController)
@@ -39,8 +40,8 @@ namespace Worker.State
             var tempObject = new GameObject("temp");
             var angle = 360 / (_defenceAnts.Count > 6 ? 6 : _defenceAnts.Count);
 
-            tempObject.transform.position = _queen.position;
-            tempObject.transform.eulerAngles = _queen.eulerAngles;
+            tempObject.transform.position = _teamController.Queen.transform.position;
+            tempObject.transform.eulerAngles = _teamController.Queen.transform.eulerAngles;
 
             var index = 0;
             foreach (var antController in _defenceAnts)

@@ -8,5 +8,8 @@ namespace Team
     {
         public WorkerAntManager WorkerAntManager;
         public Queen Queen;
+
+        [Space] 
+        [SerializeField] private int InitialWorkerAntCount = 6;
     }
 }

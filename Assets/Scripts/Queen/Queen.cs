@@ -1,9 +1,13 @@
+using Team;
 using UnityEngine;
+using Worker;
 
 namespace  AntQueen
 {
     public class Queen : MonoBehaviour
     {
+        public TeamController TeamController;
+        
         [SerializeField] private int _playerNumber;
         [SerializeField] private Transform _targetObject;
         [SerializeField] private Transform _playerModel;
@@ -11,7 +15,7 @@ namespace  AntQueen
         [SerializeField] private float _speed = 2f;
         [SerializeField] private float _spawnTriggerThreshold = 0.5f;
 
-        [SerializeField] private GameObject _antPrefab;
+        [SerializeField] private WorkerAntController _antPrefab;
 
         [SerializeField] private Animator _animator;
         [SerializeField] private float _antSpawnCooldownTime = 0.5f;
@@ -59,7 +63,10 @@ namespace  AntQueen
         {
             if(_antSpawnCooldown < 0 && GetTrigger(_playerNumber) > _spawnTriggerThreshold)
             {
-                Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
+                var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
+                newAnt.TeamController = TeamController;
+                newAnt.Initialize();
+                
                 _antSpawnCooldown = _antSpawnCooldownTime;
             }
 
@@ -78,7 +85,11 @@ namespace  AntQueen
         {
             return Input.GetAxis($"Trigger-Right-{controller}");
         }
-        
+
+        public Vector3 GetForward()
+        {
+            return _playerModel.forward;
+        }
         
         private void HandleMovementNewInput()
         { 

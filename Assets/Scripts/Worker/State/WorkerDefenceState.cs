@@ -26,7 +26,7 @@ namespace Worker.State
 
         private Vector3 GetDefensePosition()
         {
-            return _workerAntController.Queen.position + DefencePositionOffset * _defenseRange;
+            return _workerAntController.TeamController.Queen.transform.position + DefencePositionOffset * _defenseRange;
         }
         
         
