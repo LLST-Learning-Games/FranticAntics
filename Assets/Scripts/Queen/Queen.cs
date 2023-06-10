@@ -28,6 +28,7 @@ namespace  AntQueen
         //     Debug.Log("1: " + GetController("Left", 0));
         //     Debug.Log("2: " + GetController("Left", 1));
             HandleMovement();
+            HandleTarget();
         }
 
         private void HandleMovement()
