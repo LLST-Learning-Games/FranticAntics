@@ -901,6 +901,7 @@ MonoBehaviour:
   _introScreenGO: {fileID: 1211498686847274675}
   _gameModeScreenGO: {fileID: 4993506183785653926}
   _creditsScreenGO: {fileID: 5967521727840673524}
+  _levelSceneIndex: 1
 --- !u!1 &3736258615807883153
 GameObject:
   m_ObjectHideFlags: 0
