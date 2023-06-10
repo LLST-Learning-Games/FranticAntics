@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Player owner { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void InitializeEntity(IEntitySpawnInfo spawnInfo)
     {
-        
+        owner = spawnInfo.Owner;
     }
 }
