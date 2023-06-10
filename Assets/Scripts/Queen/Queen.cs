@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace  AntQueen
 {
@@ -10,7 +11,8 @@ namespace  AntQueen
     {
 
         [SerializeField] private InputReader _queenInput;
-        [SerializeField] private Transform targetObject;
+        [SerializeField] private Transform _targetObject;
+        [SerializeField] private float _targetDistance;
 
         [SerializeField] private float _speed;
         void Start()
@@ -30,7 +32,7 @@ namespace  AntQueen
             transform.Translate(movement * Time.deltaTime * _speed);
             
             Vector3 target = new Vector3(_queenInput.target.x, 0, _queenInput.target.y);
-            targetObject.transform.SetLocalPositionAndRotation(target * 3f, Quaternion.identity);
+            _targetObject.transform.SetLocalPositionAndRotation(target * 3f, Quaternion.identity);
         }
     }   
 }
