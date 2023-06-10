@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 2768702229430445445}
   - component: {fileID: 6725493680881340809}
   - component: {fileID: 9013007582280170069}
+  - component: {fileID: 7978210501222194550}
   m_Layer: 0
   m_Name: worker_ant
   m_TagString: Untagged
@@ -858,6 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _antMovement: {fileID: 5999120274337963013}
+  _antStatistics: {fileID: 7978210501222194550}
   Queen: {fileID: 0}
   Status: 0
 --- !u!114 &5999120274337963013
@@ -927,6 +929,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchIdleTime: 2
   _searchDistance: 10
+--- !u!114 &7978210501222194550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5430756129966660757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221361b27e76e8f4cb381af5abeb87fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultHp: 3
+  _defaultMovementSpeed: 2
+  _defaultAttackPower: 1
 --- !u!1 &5963606637951279541
 GameObject:
   m_ObjectHideFlags: 0
