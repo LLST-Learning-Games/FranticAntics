@@ -4,11 +4,8 @@ using UnityEngine.InputSystem;
 namespace AntQueen
 {
     
-
-    
     public class InputReader : MonoBehaviour, QueenControls.IControlsActions
     {
-        
         private QueenControls controls;
 
         private void OnEnable()
@@ -26,7 +23,7 @@ namespace AntQueen
             //Vector2 pos = Gamepad.current.leftStick.ReadValue();
             Vector2 pos = context.ReadValue<Vector2>();
         
-            Debug.Log($"({pos.x},{pos.y})");
+            Debug.Log($"Movement Vector: ({pos.x},{pos.y})");
         }
 
         public void OnButtonTest(InputAction.CallbackContext context)

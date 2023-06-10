@@ -50,7 +50,7 @@ public partial class @QueenControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""578b6b49-12c8-46da-9e94-4c727a2768ed"",
-                    ""path"": ""<Gamepad>/dpad"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

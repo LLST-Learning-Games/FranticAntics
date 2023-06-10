@@ -14,11 +14,17 @@ public class Queen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleInput();
+       // HandleInput();
     }
 
     private void HandleInput()
     {
+        var horizontal_L = Input.GetAxis("Horizontal-L");
+        var vertical_L = Input.GetAxis("Vertical-L");
         
+        if (horizontal_L > 0.1f)
+            Debug.Log(horizontal_L);
+        if (vertical_L > 0.1f)
+            Debug.Log(vertical_L);
     }
 }
