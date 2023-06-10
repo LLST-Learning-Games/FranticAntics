@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainScreenView : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class MainScreenView : MonoBehaviour
     [SerializeField] private GameObject _introScreenGO;
     [SerializeField] private GameObject _gameModeScreenGO;
     [SerializeField] private GameObject _creditsScreenGO;
+    [SerializeField] private int _levelSceneIndex;
 
     private UIState _uiState;
 
@@ -45,7 +47,7 @@ public class MainScreenView : MonoBehaviour
     
     public void OnTwoPlayerGameStartsClicked()
     {
-        Debug.LogWarning("OnTwoPlayerGameStartsClicked calling");
+        SceneManager.LoadScene(_levelSceneIndex);
     }
     
     private enum UIState
