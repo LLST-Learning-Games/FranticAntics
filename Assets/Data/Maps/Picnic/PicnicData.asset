@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSpawnPoints:
   - {fileID: 11400000, guid: 2f2a2de35c84dfd4582cf509650886a2, type: 2}
+  - {fileID: 11400000, guid: 1d443a580a5dcbf4a8b1ab1b552340fe, type: 2}
