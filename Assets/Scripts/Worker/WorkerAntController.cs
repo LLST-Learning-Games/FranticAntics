@@ -9,6 +9,7 @@ namespace Worker
     public class WorkerAntController : MonoBehaviour
     {
         [SerializeField] protected WorkerAntMovement _antMovement;
+        [SerializeField] private WorkerAntStatistics _antStatistics;
         public Transform Queen;
 
         public WorkerAntStatus Status;
@@ -24,6 +25,7 @@ namespace Worker
         private void Awake()
         {
             _antMovement.Initialize(this);
+            _antStatistics.Initialize(this);
             
             _allStateControllers.Add(WorkerAntStatus.Defense, GetComponent<WorkerDefenceState>());
             _allStateControllers.Add(WorkerAntStatus.SearchFood, GetComponent<WorkerSearchState>());
@@ -74,6 +76,11 @@ namespace Worker
             OnPathCompleted += onPathCompleted;
             
             return _antMovement.SetDestination(destination);
+        }
+
+        public void Die()
+        {
+            Debug.LogWarning($"{this.name} die now.");
         }
     }
 }
