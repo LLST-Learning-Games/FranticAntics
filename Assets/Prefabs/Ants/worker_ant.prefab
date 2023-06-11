@@ -948,7 +948,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a07f919b3394c679bd317b09e86cc84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDuration: 2
 --- !u!114 &5944238163239718533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 2768702229430445445}
   _defaultHp: 3
-  _defaultMovementSpeed: 2
+  _defaultMovementSpeed: 5
   _defaultAttackPower: 1
 --- !u!114 &95735361611976361
 MonoBehaviour:
@@ -1003,7 +1002,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0.28, z: 0}
 --- !u!54 &1947846538759714722
 Rigidbody:

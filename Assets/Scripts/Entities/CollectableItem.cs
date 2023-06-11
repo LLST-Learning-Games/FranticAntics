@@ -99,6 +99,18 @@ namespace Entities
                 default:
                     throw new System.Exception("Unhandled case");
             }
+
+            foreach (var ant in AntsAssigned)
+            {
+                ant.Whistle(Vector3.zero);
+            }
+
+            AntsAssigned.Clear();
+        }
+
+        public void HandleLostAssignedAnts()
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

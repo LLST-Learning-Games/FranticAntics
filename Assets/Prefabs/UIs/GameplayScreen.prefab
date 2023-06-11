@@ -225,6 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8f9be67b92fea49bde308762939678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startKey: 2
+  backgroundClip: {fileID: 8300000, guid: 11b8d90a12f6e2b4fad03b75a2788efb, type: 3}
   _gameOnObjects: {fileID: 833516837384462127}
   _gameOverObjects: {fileID: 9093863756179572046}
   _timer: {fileID: 6656851495649869929}
@@ -233,6 +235,8 @@ MonoBehaviour:
   _roundTimeLimit: 5
   _titleSceneIndex: 0
   GameRunning: 0
+  GameIsOver: 0
+  GameOverDelay: 2
 --- !u!1 &4900413096139858749
 GameObject:
   m_ObjectHideFlags: 0
