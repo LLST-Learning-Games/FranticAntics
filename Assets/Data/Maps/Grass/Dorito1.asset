@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2375c8645a41b09858761e949326fe, type: 3}
   m_Name: Dorito1
   m_EditorClassIdentifier: 
-  MapPosition: {x: 15, y: 0, z: 15}
+  MapPosition: {x: 50, y: 0, z: 50}
   Type: 2
-  PrefabOverride: {fileID: 2300756144372489342, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
+  PlayerIndex: 0
+  PrefabOverride: {fileID: 4450313214207954573, guid: 42c88a8f9c04313408b26b008527dce2,
     type: 3}
   RotationOverride: {x: 0, y: 0, z: 0}
