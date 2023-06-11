@@ -10,6 +10,8 @@ namespace Worker
 {
     public class WorkerAntController : MonoBehaviour
     {
+        public Action OnAntDead;
+
         public TeamController TeamController;
 
         public WorkerAntMovement Movement => _antMovement;
@@ -98,7 +100,10 @@ namespace Worker
         public void Die()
         {
             IsDead = true;
-
+            
+            OnAntDead?.Invoke();
+            OnAntDead = null;
+            
             _antMovement.Disable();
             foreach (var stateController in _allStateControllers)
             {

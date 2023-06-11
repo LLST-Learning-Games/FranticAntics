@@ -22,10 +22,14 @@ namespace Worker.State
             base.Activate();
 
             _workerAntController.Status = WorkerAntStatus.CollectFood;
+
+            _workerAntController.OnAntDead += OnAntDead;
         }
 
         public override void Deactivate()
         {
+            _workerAntController.OnAntDead -= OnAntDead;
+            
             base.Deactivate();
 
             TargetCollectable = null;
@@ -94,6 +98,21 @@ namespace Worker.State
             {
                 _workerAntController.Whistle(Vector3.zero);
             }
+        }
+        
+        private void OnAntDead()
+        {
+            if(TargetCollectable == null)
+                return;
+
+            if (TargetCollectable.Mineable)
+            {
+                Destroy(_collectedPiece);
+                return;
+            }
+            
+            TargetCollectable.transform.SetParent(null);
+            TargetCollectable.ItemCollected = false;
         }
     }
 }
