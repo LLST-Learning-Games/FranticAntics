@@ -111,7 +111,7 @@ namespace  AntQueen
 
         private bool CanMove()
         {
-            if (_sendAntMovementPauseCooldown > 0)
+            if (_sendAntMovementPauseCooldown > 0 || _antSpawnButtonDown)
             {
                 return false;
             }
