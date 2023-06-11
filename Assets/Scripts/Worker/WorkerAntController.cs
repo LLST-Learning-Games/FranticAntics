@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Team;
 using UnityEngine;
 using Worker.State;
@@ -11,10 +12,13 @@ namespace Worker
     {
         public TeamController TeamController;
 
+        public WorkerAntMovement Movement => _antMovement;
+        
         [SerializeField] private SkinnedMeshRenderer _meshRenderer;
         [SerializeField] protected WorkerAntMovement _antMovement;
         [SerializeField] private WorkerAntStatistics _antStatistics;
 
+        public bool IsDead;
         public WorkerAntStatus Status;
 
         private Dictionary<WorkerAntStatus, WorkerStateBase> _allStateControllers = new();
@@ -93,7 +97,27 @@ namespace Worker
 
         public void Die()
         {
-            Debug.LogWarning($"{this.name} die now.");
+            IsDead = true;
+
+            _antMovement.Disable();
+            foreach (var stateController in _allStateControllers)
+            {
+                stateController.Value.enabled = false;
+                stateController.Value.Deactivate();
+            }
+            
+            TeamController.WorkerAntManager.RemoveWorkerAnt(this);
+            
+            _antMovement.Animator.SetTrigger("dead");
+            transform.DOScale(0, .2f).SetDelay(.2f).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
+        }
+
+        public void TakeDamage(int damage, bool instantDeath)
+        {
+            _antStatistics.TakeDamage(damage, instantDeath);
         }
     }
 }
