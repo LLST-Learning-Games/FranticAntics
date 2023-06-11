@@ -35,6 +35,7 @@ namespace  AntQueen
         [SerializeField] private ParticleSystem _whistleParticleSystem;
         [SerializeField] private float _whistleScaler = 0.5f;
         [SerializeField] private ParticleSystem _calloutParticleSystem;
+        [SerializeField] private GameObject _spawnDelayParticleLoopingObject;
 
         private bool _antSpawnButtonDown = false;
         private float _antSpawnStartDelay;
@@ -72,7 +73,7 @@ namespace  AntQueen
             _antSpawnCooldown = _antSpawnCooldownTime;
             _sendAntCooldown = _sendAntCooldownTime;
             _sendAntMovementPauseCooldown = -1;
-            _antSpawnStartDelay = -1;
+            _antSpawnStartDelay = _antSpawnStartDelayTime;
         }
 
         void Update()
@@ -88,7 +89,6 @@ namespace  AntQueen
         {
             var time = Time.deltaTime;
             _antSpawnCooldown -= time;
-            _antSpawnStartDelay -= time;
             _sendAntCooldown -= time;
             _sendAntMovementPauseCooldown -= time;
         }
@@ -170,22 +170,36 @@ namespace  AntQueen
 
         public void HandleSpawnAnt()
         {
-            if (_antSpawnStartDelay > 0.0f)
-                return;
-
-            if (!InputUtility.IsButtonPressed(_playerNumber, _spawnKey))
+            // Recently spawned
+            if (_antSpawnCooldown > 0.0f)
             {
+                _spawnDelayParticleLoopingObject.SetActive(false);
+                return;
+            }
+            
+            // Button let go
+            bool spawnButtonPressed = InputUtility.IsButtonPressed(_playerNumber, _spawnKey);
+            if (!spawnButtonPressed)
+            {
+                _spawnDelayParticleLoopingObject.SetActive(false);
                 _antSpawnStartDelay = _antSpawnStartDelayTime;
                 return;
             }
-
-            if (_antSpawnCooldown > 0.0f)
-                return;
-
+            
+            // Can't afford
             if (!CanSpawnAnt())
                 return;
+            
+            // Button pressed
+            _antSpawnStartDelay -= Time.deltaTime;
+            _spawnDelayParticleLoopingObject.SetActive(true);
 
+
+            if (_antSpawnStartDelay > 0)
+                return;
+            
             SpawnAnt();
+            _antSpawnStartDelay = _antSpawnStartDelayTime;
             _antSpawnCooldown = _antSpawnCooldownTime;
             TeamController.Nectar -= TeamController.AntNectarCost;
         }
