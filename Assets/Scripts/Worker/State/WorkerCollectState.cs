@@ -38,8 +38,9 @@ namespace Worker.State
             TargetCollectable = null;
             _endDestination = null;
             _collectedPiece = null;
-            
+            _waitingForEnoughToCollect = false;
             _itemCollected = false;
+            _resourcesCollected = 0;
         }
 
         public void SetTarget(CollectableItem item)
@@ -83,17 +84,17 @@ namespace Worker.State
                         
                     _itemCollected = true;
                     
+                    if(!TargetCollectable.Mineable)
+                    {
+                        _collectedPiece = TargetCollectable.gameObject;
+                    }
+                    else
+                    {
+                        _collectedPiece = TargetCollectable.Mine();
+                    }
+                    
                     if(TargetCollectable.Mineable || TargetCollectable.CheckIfPrimaryCarrier(_workerAntController))
                     {
-                        if(!TargetCollectable.Mineable)
-                        {
-                            _collectedPiece = TargetCollectable.gameObject;
-                        }
-                        else
-                        {
-                            _collectedPiece = TargetCollectable.Mine();
-                        }
-                        
                         _resourcesCollected = TargetCollectable.GetResources();
                         _collectedPiece.transform.SetParent(_carryParent);
                         _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
@@ -120,6 +121,7 @@ namespace Worker.State
             }
             catch (Exception e)
             {
+                
                 if(TargetCollectable)
                     TargetCollectable.UnassignAnt(_workerAntController);
                 _workerAntController.Whistle(Vector3.zero);
@@ -137,10 +139,10 @@ namespace Worker.State
                 Destroy(_collectedPiece);
                 return;
             }
-
+            
             HandleDisruptedCarry();
         }
-
+        
         private void HandleDisruptedCarry()
         {
             if(TargetCollectable)
@@ -158,12 +160,11 @@ namespace Worker.State
                 && TargetCollectable.AntsAssigned[0].GetCurrentStateController() is WorkerCollectState state)
             {
                 state.AssignThisAntAsLeadCarrier(TargetCollectable);
-                return;
             }
 
-            TargetCollectable.transform.SetParent(null);
+            //TargetCollectable.transform.SetParent(null);
         }
-
+        
         public void AssignThisAntAsLeadCarrier(CollectableItem target)
         {
             target.transform.SetParent(_carryParent);
