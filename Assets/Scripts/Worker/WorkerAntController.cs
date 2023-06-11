@@ -10,14 +10,12 @@ namespace Worker
     public class WorkerAntController : MonoBehaviour
     {
         public TeamController TeamController;
-        
+
+        [SerializeField] private SkinnedMeshRenderer _meshRenderer;
         [SerializeField] protected WorkerAntMovement _antMovement;
         [SerializeField] private WorkerAntStatistics _antStatistics;
 
         public WorkerAntStatus Status;
-        
-        private bool _isStopped => _antMovement.IsStopped;
-        private bool _isIdle => _antMovement.IsIdle;
 
         private Dictionary<WorkerAntStatus, WorkerStateBase> _allStateControllers = new();
 
@@ -29,6 +27,7 @@ namespace Worker
             _allStateControllers.Add(WorkerAntStatus.Defense, GetComponent<WorkerDefenceState>());
             _allStateControllers.Add(WorkerAntStatus.SearchFood, GetComponent<WorkerSearchState>());
             _allStateControllers.Add(WorkerAntStatus.CollectFood, GetComponent<WorkerCollectState>());
+            _allStateControllers.Add(WorkerAntStatus.Attack, GetComponent<WorkerAttackState>());
 
             foreach (var stateController in _allStateControllers)
             {
@@ -36,7 +35,8 @@ namespace Worker
             }
             
             TeamController.WorkerAntManager.RegisterWorkerAnt(this);
-            
+            _meshRenderer.materials[0].SetColor("_BaseColor", TeamController.WorkerAntColor);
+
             Whistle(Vector3.zero);
         }
 

@@ -138,8 +138,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.6603774, g: 0.015574936, b: 0.015574936, a: 1}
+    - _Color: {r: 0.6603774, g: 0.015574937, b: 0.015574937, a: 1}
     - _ColorTint1: {r: 0.24948363, g: 0.4528302, b: 0, a: 1}
     - _ColorTint2: {r: 0.3962264, g: 0.17531946, b: 0.076628685, a: 1}
     - _ColorTint3: {r: 1, g: 0.63471943, b: 0, a: 1}

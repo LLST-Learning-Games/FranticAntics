@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 2768702229430445445}
   - component: {fileID: 6725493680881340809}
   - component: {fileID: 9013007582280170069}
+  - component: {fileID: 3396216706517529867}
   - component: {fileID: 5944238163239718533}
   - component: {fileID: 7978210501222194550}
   - component: {fileID: 6104174768137077150}
@@ -863,6 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamController: {fileID: 0}
+  _meshRenderer: {fileID: 267870320497785133}
   _antMovement: {fileID: 5999120274337963013}
   _antStatistics: {fileID: 7978210501222194550}
   Status: 0
@@ -878,7 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1ba3f957094d09a6d8e270bbd5a864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _navMeshTarget: {fileID: 0}
   _navMeshAgent: {fileID: 2768702229430445445}
   _animator: {fileID: 5160142469793065150}
   IsStopped: 0
@@ -933,6 +934,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchIdleTime: 2
   _searchDistance: 10
+--- !u!114 &3396216706517529867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5430756129966660757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a07f919b3394c679bd317b09e86cc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5944238163239718533
 MonoBehaviour:
   m_ObjectHideFlags: 0

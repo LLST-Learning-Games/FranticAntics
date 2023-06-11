@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17528328, g: 0.2193019, b: 0.30161384, a: 1}
+  m_IndirectSpecularColor: {r: 0.17528379, g: 0.21930264, b: 0.30161515, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -164,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -819,7 +819,7 @@ Transform:
   - {fileID: 1659190141}
   - {fileID: 1598020929}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &416446201
 MonoBehaviour:
@@ -966,7 +966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamController: {fileID: 1598020930}
   _defenceAnts: []
-  _lineRange: 0.65
+  _lineRange: 0.7
 --- !u!114 &530418289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamController: {fileID: 1659190142}
   _defenceAnts: []
-  _lineRange: 0.65
+  _lineRange: 0.7
 --- !u!224 &1252209784 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7546036127966213791, guid: b5e9496f80b6c4747b6e3c2f800e639a,
@@ -1514,7 +1514,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -1603,7 +1603,7 @@ PrefabInstance:
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
@@ -2089,8 +2089,77 @@ MonoBehaviour:
   AntNectarCost: 20
   NectarGainPerSecond: 2
   InitialAnts: 6
+  WorkerAntColor: {r: 0.010946936, g: 0.13361512, b: 0.7735849, a: 1}
   Score: 0
   Nectar: 0
+--- !u!1 &1633734209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1633734212}
+  - component: {fileID: 1633734211}
+  - component: {fileID: 1633734210}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1633734210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633734209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1633734211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633734209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1633734212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633734209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1659190140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,6 +2215,7 @@ MonoBehaviour:
   AntNectarCost: 20
   NectarGainPerSecond: 2
   InitialAnts: 6
+  WorkerAntColor: {r: 0.7735849, g: 0.032840855, b: 0.032840855, a: 1}
   Score: 0
   Nectar: 0
 --- !u!1001 &1765012810
@@ -2235,6 +2305,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7878079219405642026, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ed6d5a888def4aecaf16ddce15607fa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9e646c5d2fb348739efd06265c59e9a, type: 3}
 --- !u!4 &1765012811 stripped
@@ -2418,6 +2493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: QueenPrefab_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103364779540476501, guid: b9e646c5d2fb348739efd06265c59e9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9e646c5d2fb348739efd06265c59e9a, type: 3}
