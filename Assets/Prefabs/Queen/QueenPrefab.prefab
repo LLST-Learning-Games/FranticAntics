@@ -53,12 +53,15 @@ MonoBehaviour:
   _targetObject: {fileID: 3103364781115182426}
   _playerModel: {fileID: 7926614702899804919}
   _targetDistance: 1
-  _speed: 3
   _spawnTriggerThreshold: 0.5
   _antPrefab: {fileID: 2768702229430445444, guid: cb6b3c5817468472b8988b577b54beb5,
     type: 3}
   _animator: {fileID: 7604969460104979197}
+  _speed: 3
+  _antSpawnStartDelayTime: 2
   _antSpawnCooldownTime: 0.5
+  _sendAntMovementPauseCooldownTime: 0.5
+  _sendAntCooldownTime: 0.2
 --- !u!195 &138083542882140024
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -442,6 +445,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5688453530548094316, guid: 963d01983609e46fbb6df9b3983be086,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cf57b83b29cb545269c63fa442e44105, type: 2}
     - target: {fileID: 5738636168273041492, guid: 963d01983609e46fbb6df9b3983be086,
         type: 3}
       propertyPath: m_Layer
