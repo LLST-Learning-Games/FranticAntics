@@ -98,8 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForQueen: 0
-  SpeedMultiplier: 1
   Mineable: 1
+  SpeedMultiplier: 1
+  Points: 50
+  Nectar: 0
+  _minedPiecePrefab: {fileID: 0}
   ItemCollected: 0
 --- !u!65 &8181983213409042293
 BoxCollider:
