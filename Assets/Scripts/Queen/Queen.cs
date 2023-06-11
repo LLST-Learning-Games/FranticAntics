@@ -1,5 +1,6 @@
 using Team;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Worker;
 
 namespace  AntQueen
@@ -19,15 +20,20 @@ namespace  AntQueen
 
         [SerializeField] private Animator _animator;
         [SerializeField] private float _antSpawnCooldownTime = 0.5f;
+        [SerializeField] private float _sendAntMovementPauseCooldownTime = 0.5f;
+        [SerializeField] private float _sendAntCooldownTime = 0.2f;
+        
 
         private float _antSpawnCooldown;
+        private float _sendAntMovementPauseCooldown;
+        private float _sendAntCooldown;
         private InputPlatformMode _inputPlatformMode;
         
         void Start()
         {
             UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
-            _antSpawnCooldown = _antSpawnCooldownTime;
-
+            
+            ResetCooldowns();
 
             for(int i = 0; i < TeamController.InitialAnts; ++i)
             {
@@ -47,26 +53,44 @@ namespace  AntQueen
             
         }
 
-        void Update() 
+        private void ResetCooldowns()
         {
+            _antSpawnCooldown = _antSpawnCooldownTime;
+            _sendAntCooldown = _sendAntCooldownTime;
+            _sendAntMovementPauseCooldown = -1;
+        }
+
+        void Update()
+        {
+            UpdateCooldowns();
             HandleMovement();
             HandleTarget();
             HandleCommand();
             HandleSpawnAnt();
         }
-        
+
+        private void UpdateCooldowns()
+        {
+            var time = Time.deltaTime;
+            _antSpawnCooldown -= time;
+            _sendAntCooldown -= time;
+            _sendAntMovementPauseCooldown -= time;
+        }
+
         private void HandleMovement()
         {
-            //Debug.LogWarning($"platform: {Application.platform}");
-            
-            
             var leftInput = GetStickInput("Left", _playerNumber);
-            
-            
-            // Debug.LogWarning($"leftInput: {leftInput}");
             Vector3 movement = new Vector3(leftInput.x, 0, leftInput.y);
-            transform.Translate(movement * Time.deltaTime * _speed);
-        
+            if(CanMove())
+            {
+                transform.Translate(movement * Time.deltaTime * _speed);
+                _animator.speed = movement.magnitude * _speed;
+            }
+            else
+            {
+                _animator.speed = 0;
+            }
+            
             if(movement != Vector3.zero)
             {
                 _playerModel.rotation = Quaternion.Slerp(
@@ -74,14 +98,21 @@ namespace  AntQueen
                     Quaternion.LookRotation(movement),
                     Time.deltaTime * 40f);
             }
-            _animator.speed = movement.magnitude * _speed;
+        }
+
+        private bool CanMove()
+        {
+            if (_sendAntMovementPauseCooldown > 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void HandleTarget()
         {
             var rightInput = GetStickInput("Right", _playerNumber);
-            
-            // Debug.LogWarning($"rightInput: {rightInput}");
             
             Vector3 target = new Vector3(rightInput.x, 0, rightInput.y);
             _targetObject.transform.SetLocalPositionAndRotation(target * _targetDistance, Quaternion.identity);
@@ -93,25 +124,36 @@ namespace  AntQueen
             var aInputString = GetButtonInputName("A", _playerNumber);
             var bInputString = GetButtonInputName("B", _playerNumber);
 
-            if(Input.GetButtonDown(aInputString))
+            if(Input.GetButtonDown(aInputString) || Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.LogWarning("A button calling");
-                
-                TeamController.WorkerAntManager.SendForSearch();
+                SendWorkerAntForSearch();
             }
 
             else if(Input.GetButtonDown(bInputString))
             {
                 Debug.LogWarning("B button calling");
-                
                 TeamController.WorkerAntManager.Whistle();
+            }
+        }
+
+        private void SendWorkerAntForSearch()
+        {
+            if (_sendAntCooldown < 0)
+            {
+                TeamController.WorkerAntManager.SendForSearch();
+                _sendAntCooldown = _sendAntCooldownTime;
+                _sendAntMovementPauseCooldown = _sendAntMovementPauseCooldownTime;
+                Debug.Log($"Sending Ant");
+            }
+            else
+            {
+                Debug.Log($"Send Ant Cooling down for {_sendAntCooldown}");
             }
         }
 
         public void HandleSpawnAnt()
         {
-            _antSpawnCooldown -= Time.deltaTime;
-
             if (!CanSpawnAnt())
             {
                 return;
