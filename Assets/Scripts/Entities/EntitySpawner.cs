@@ -11,43 +11,15 @@ public class EntitySpawner : MonoBehaviour
     [Header("Criteria")]
     public float initialDelaySeconds;
     public float minDelaySeconds;
-    public float maxDelaySeconds;
     public int maxActiveEntities;
-
     public bool spawnOnMe;
-
-   
-    private int spawnCount = 0;
-
 
     private float secondsUntilNextSpawn;
     private List<GameObject> activeEntities = new List<GameObject>();
 
-    [SerializeField] private float spwanHeight = 50;
-    public Transform topLeftSpawnPoint;
-    public Transform bottomRightSpawnPoint;
-    
-    private float spawnXStart;
-    private float spawnXEnd;
-    
-    private float spawnZStart;
-    private float spawnZEnd;
-    
     private void Start()
     {
         secondsUntilNextSpawn = initialDelaySeconds;
-
-        spawnXStart = topLeftSpawnPoint.transform.position.x;
-        spawnXEnd = bottomRightSpawnPoint.transform.position.x;
-        
-        spawnZStart = topLeftSpawnPoint.transform.position.z;
-        spawnZEnd = bottomRightSpawnPoint.transform.position.z;
-        
-        // var rand = UnityEngine.Random.Range( spawnXStart, spawnXEnd);;
-        //
-        // Debug.LogWarning($"x {spawnXStart} {spawnXEnd} ");
-        // Debug.LogWarning($"z {spawnZStart} {spawnZEnd}");
-        
     }
 
     private void Update()
@@ -59,12 +31,6 @@ public class EntitySpawner : MonoBehaviour
         {
             SpawnRandomEntity();
         }
-
-
-        // var oldPos = transform.position;
-        // float newY = oldPos.y * Time.deltaTime * 0.01f;
-        //
-        // transform.position = new Vector3(oldPos.x, newY, oldPos.z);
     }
 
     private bool CanSpawnEntities()
@@ -100,8 +66,7 @@ public class EntitySpawner : MonoBehaviour
     {
         Entity entityToSpawn = PickRandomEntity();
         SpawnEntity(entityToSpawn);
-        spawnCount++;
-        secondsUntilNextSpawn = UnityEngine.Random.Range( minDelaySeconds, maxDelaySeconds);
+        secondsUntilNextSpawn = minDelaySeconds;
     }
 
     private Entity PickRandomEntity()
@@ -131,16 +96,8 @@ public class EntitySpawner : MonoBehaviour
 
     protected virtual void SpawnEntity(Entity entity)
     {
-        // todo have a look
-        
-        var randX = UnityEngine.Random.Range( spawnXStart, spawnXEnd);
-        var randZ = UnityEngine.Random.Range( spawnZStart, spawnZEnd);
-        
-        
-        // Debug.LogWarning($"result {randX} {spwanHeight} {randZ}");
-        
-        GameObject obj = Instantiate(entity.prefab, new Vector3(randX, spwanHeight, randZ), Quaternion.identity);
-        
+        GameObject obj = Instantiate(entity.prefab, transform, false);
+
         if (!spawnOnMe)
             obj.transform.SetParent(transform.parent, true);
         activeEntities.Add(obj);
