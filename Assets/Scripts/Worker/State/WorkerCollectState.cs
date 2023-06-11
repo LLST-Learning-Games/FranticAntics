@@ -31,6 +31,9 @@ namespace Worker.State
         {
             _workerAntController.OnAntDead -= OnAntDead;
             
+            if(TargetCollectable)
+                TargetCollectable.UnassignAnt(_workerAntController);
+            
             base.Deactivate();
 
             TargetCollectable = null;
@@ -60,8 +63,10 @@ namespace Worker.State
 
             try
             {
-                if(TargetCollectable.ItemCollected && !_itemCollected)
+                if (TargetCollectable.ItemCollected && !_itemCollected)
+                {
                     _workerAntController.Whistle(Vector3.zero);
+                }
 
                 if (!_itemCollected 
                     && Vector3.Distance(TargetCollectable.transform.position, transform.position) < TargetCollectable.AssignmentWaitDistance)
@@ -78,19 +83,26 @@ namespace Worker.State
                     }
                         
                     _itemCollected = true;
-                    _resourcesCollected = TargetCollectable.GetResources();
-                
+                    
                     if(!TargetCollectable.Mineable)
-                        _collectedPiece = TargetCollectable.gameObject;
-                    else
-                        _collectedPiece = TargetCollectable.Mine();
-                
-                    _collectedPiece.transform.SetParent(_carryParent);
-                    _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
                     {
-                        if(!TargetCollectable.Mineable)
-                            TargetCollectable.ItemCollected = true;
-                    });
+                        _collectedPiece = TargetCollectable.gameObject;
+                    }
+                    else
+                    {
+                        _collectedPiece = TargetCollectable.Mine();
+                    }
+                    
+                    if(TargetCollectable.Mineable || TargetCollectable.CheckIfPrimaryCarrier(_workerAntController))
+                    {
+                        _resourcesCollected = TargetCollectable.GetResources();
+                        _collectedPiece.transform.SetParent(_carryParent);
+                        _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
+                        {
+                            if (!TargetCollectable.Mineable)
+                                TargetCollectable.ItemCollected = true;
+                        });
+                    }
                 }
                 else if (_itemCollected && _collectedPiece != null)
                 {
@@ -109,9 +121,13 @@ namespace Worker.State
             }
             catch (Exception e)
             {
+                
+                if(TargetCollectable)
+                    TargetCollectable.UnassignAnt(_workerAntController);
                 _workerAntController.Whistle(Vector3.zero);
             }
         }
+        
         
         private void OnAntDead()
         {
@@ -124,7 +140,8 @@ namespace Worker.State
                 return;
             }
             
-            TargetCollectable.UnassignAnt(_workerAntController);
+            if(TargetCollectable)
+                TargetCollectable.UnassignAnt(_workerAntController);
             TargetCollectable.transform.SetParent(null);
             TargetCollectable.ItemCollected = false;
         }

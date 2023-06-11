@@ -64,6 +64,7 @@ namespace Entities
         public virtual void AssignAnt(WorkerAntController ant) => AntsAssigned.Add(ant);
         public virtual void UnassignAnt(WorkerAntController ant) => AntsAssigned.Remove(ant);
         public bool HasEnoughAntsToCarry() => AntsAssigned.Count >= MinAssignedAntsForPickup;
+        public bool CheckIfPrimaryCarrier(WorkerAntController ant) => AntsAssigned.IndexOf(ant) == 0;
 
         private void UpdateMineIndicators()
         {
