@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3590536241775313305}
   - component: {fileID: 2628007078186202448}
   - component: {fileID: 1903184352855884040}
-  - component: {fileID: 4495156323863988469}
-  m_Layer: 0
+  - component: {fileID: -1414721092356226037}
+  - component: {fileID: 1610609554761110581}
+  m_Layer: 6
   m_Name: Nectar
-  m_TagString: Untagged
+  m_TagString: collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,16 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4495156323863988469
-SphereCollider:
+--- !u!114 &-1414721092356226037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509136715491528997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02457fd72cfd424f9e6fd2afc3fea953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForQueen: 0
+  SpeedMultiplier: 1
+--- !u!65 &1610609554761110581
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509136715491528997}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
