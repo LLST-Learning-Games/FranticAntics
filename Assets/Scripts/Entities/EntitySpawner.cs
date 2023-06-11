@@ -131,12 +131,6 @@ public class EntitySpawner : MonoBehaviour
 
     protected virtual void SpawnEntity(Entity entity)
     {
-
-        GameObject obj = Instantiate(entity.prefab, transform, false);
-
-        if (!spawnOnMe)
-            obj.transform.SetParent(transform.parent, true);
-
         // todo have a look
         
         var randX = UnityEngine.Random.Range( spawnXStart, spawnXEnd);
