@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
+using Unity.Mathematics;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -10,16 +13,21 @@ public class EntitySpawner : MonoBehaviour
 
     [Header("Criteria")]
     public float initialDelaySeconds;
-    public float minDelaySeconds;
+    public float minDelaySeconds = 2;
+    public float maxDelaySeconds = 10;
     public int maxActiveEntities;
+
     public bool spawnOnMe;
 
+   
+    private int spawnCount = 0;
+    
     private float secondsUntilNextSpawn;
     private List<GameObject> activeEntities = new List<GameObject>();
-
+    
     private void Start()
     {
-        secondsUntilNextSpawn = initialDelaySeconds;
+        secondsUntilNextSpawn = initialDelaySeconds + UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
     }
 
     private void Update()
@@ -57,6 +65,10 @@ public class EntitySpawner : MonoBehaviour
             if (!entity)
             {
                 activeEntities.RemoveAt(i--);
+                
+                // prevent immediate drop items
+                secondsUntilNextSpawn = UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
+                
                 continue;
             }
         }
@@ -66,7 +78,8 @@ public class EntitySpawner : MonoBehaviour
     {
         Entity entityToSpawn = PickRandomEntity();
         SpawnEntity(entityToSpawn);
-        secondsUntilNextSpawn = minDelaySeconds;
+        spawnCount++;
+        secondsUntilNextSpawn = UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
     }
 
     private Entity PickRandomEntity()
@@ -97,10 +110,34 @@ public class EntitySpawner : MonoBehaviour
     protected virtual void SpawnEntity(Entity entity)
     {
         GameObject obj = Instantiate(entity.prefab, transform, false);
+        
+        SpawnableEntitiy spawnableEntity = obj.GetComponent<SpawnableEntitiy>();
 
+        
+        var startPos = transform.position;
+
+        var endingPos = new UnityEngine.Vector3(startPos.x, 0.0f, startPos.z);
+        
+        // Debug.LogWarning($"startPos: {startPos}");
+        // Debug.LogWarning($"endingPos: {endingPos}");
+        
+        spawnableEntity.Initialise(startPos, endingPos);
+        
+        
         if (!spawnOnMe)
             obj.transform.SetParent(transform.parent, true);
         activeEntities.Add(obj);
+
+
+
+        // old code
+        //GameObject obj = Instantiate(entity.prefab, transform, false);
+
+        //if (!spawnOnMe)
+        //    obj.transform.SetParent(transform.parent, true);
+        //activeEntities.Add(obj);
+
+        
     }
 
     #region Embedded Types

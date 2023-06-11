@@ -18,6 +18,8 @@ public class PlayerHUD : MonoBehaviour
         ScoreLabel.text = TeamController.Score.ToString("0");
         NectarLabel.text = TeamController.Nectar.ToString("0");
         AntsLabel.text = TeamController.workers.Count.ToString("0");
-        NectarFillMask.fillAmount = TeamController.Nectar / TeamController.AntNectarCost;
+
+        if (NectarFillMask)
+            NectarFillMask.fillAmount = TeamController.Nectar / TeamController.AntNectarCost;
     }
 }
