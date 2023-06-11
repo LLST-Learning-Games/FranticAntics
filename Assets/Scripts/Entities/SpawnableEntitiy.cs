@@ -5,11 +5,10 @@ using UnityEngine;
 public class SpawnableEntitiy : MonoBehaviour
 {
     // Start is called before the first frame update
-
-
     public Vector3 _startingPos;
     public Vector3 _endingPos;
 
+    public float _groundLevelForModel = 0f;
 
     public float dropTime = 2f;
     private float _timelapse = 0f;
@@ -17,10 +16,9 @@ public class SpawnableEntitiy : MonoBehaviour
     public void Initialise(Vector3 startingPos, Vector3 endingPos)
     {
         _startingPos = startingPos;
-        _endingPos = endingPos;
+        _endingPos = new Vector3(endingPos.x, _groundLevelForModel, endingPos.z);
 
         _timelapse = 0;
-
     }
     
     void Update()
