@@ -12,6 +12,7 @@ public class EntitySpawner : MonoBehaviour
     public float initialDelaySeconds;
     public float minDelaySeconds;
     public int maxActiveEntities;
+    public bool spawnOnMe;
 
     private float secondsUntilNextSpawn;
     private List<GameObject> activeEntities = new List<GameObject>();
@@ -96,7 +97,9 @@ public class EntitySpawner : MonoBehaviour
     protected virtual void SpawnEntity(Entity entity)
     {
         GameObject obj = Instantiate(entity.prefab, transform, false);
-        obj.transform.SetParent(transform.parent, true);
+
+        if (!spawnOnMe)
+            obj.transform.SetParent(transform.parent, true);
         activeEntities.Add(obj);
     }
 

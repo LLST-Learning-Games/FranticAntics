@@ -89,6 +89,7 @@ namespace Worker.State
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
                         TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
+                        Destroy(TargetCollectable.gameObject);
 
                         _workerAntController.Whistle(Vector3.zero);
                     }

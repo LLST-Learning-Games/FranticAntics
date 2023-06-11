@@ -72,7 +72,7 @@ namespace Worker.State
             if (collectableItem == null)
                 return;
 
-            if (collectableItem.ResourcesRemaining <= 0 || collectableItem.ItemCollected)
+            if (!collectableItem.CanCollect)
                 return;
 
             _workerAntController.ChangeState(WorkerAntStatus.CollectFood);

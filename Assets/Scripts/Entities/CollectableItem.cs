@@ -28,7 +28,9 @@ namespace Entities
         [HideInInspector] public bool ItemCollected;
         private float initialScale;
 
-        private void Start()
+        public virtual bool CanCollect => !ItemCollected && ResourcesRemaining > 0f;
+
+        protected virtual void Start()
         {
             ResourcesRemaining = TotalResources;
             initialScale = transform.lossyScale.x;
