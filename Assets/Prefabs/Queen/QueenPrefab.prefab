@@ -52,7 +52,7 @@ MonoBehaviour:
   _targetObject: {fileID: 3103364781115182426}
   _playerModel: {fileID: 7926614702899804919}
   _targetDistance: 1
-  _speed: 10
+  _speed: 3
   _spawnTriggerThreshold: 0.5
   _antPrefab: {fileID: 2768702229430445444, guid: cb6b3c5817468472b8988b577b54beb5,
     type: 3}

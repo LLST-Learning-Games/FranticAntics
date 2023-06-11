@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: GrassData
   m_EditorClassIdentifier: 
   LevelSpawnPoints:
-  - {fileID: 11400000, guid: 2f2a2de35c84dfd4582cf509650886a2, type: 2}
-  - {fileID: 11400000, guid: 1d443a580a5dcbf4a8b1ab1b552340fe, type: 2}
-  - {fileID: 11400000, guid: 8608934453f72fa4e8a1e31583aa2d5d, type: 2}
-  - {fileID: 11400000, guid: 5090f77952b730f4c881983350a094a8, type: 2}
-  - {fileID: 11400000, guid: 6505010ae81fbee40a5991d3719f9bf2, type: 2}
-  - {fileID: 11400000, guid: 24e60f69240d834498ff2d591b855073, type: 2}
+  - {fileID: 11400000, guid: 7d032a6837c14be4dbdc5def11c2f1fc, type: 2}
+  - {fileID: 11400000, guid: 731cf4ab27ea82d48aa30d23311a14fd, type: 2}
+  - {fileID: 11400000, guid: 6804228095dc46e459a8bce4a11cdb5d, type: 2}
+  - {fileID: 11400000, guid: d6ea64eb8055c3242a8916082c7ad0f0, type: 2}
+  - {fileID: 11400000, guid: 7eaed3034f686c04691ef19837673bfe, type: 2}
+  - {fileID: 11400000, guid: 747a1ee9bac672f47a0365ae05d25836, type: 2}
+  - {fileID: 11400000, guid: e1fd247627c2ec64cbb2b7e6354d3831, type: 2}
+  - {fileID: 11400000, guid: 0d08b73d763a28f4e9d3d48258218512, type: 2}
   ObstaclePrefabs:
   - {fileID: 6392208634544871943, guid: 42e5e2f0c02ba8f43a8fec07fa5ff53b, type: 3}
   - {fileID: 4144295855418836283, guid: 74d43ffbc5f521c48b61f11de055fd91, type: 3}

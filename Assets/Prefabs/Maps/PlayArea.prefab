@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee5a92da6f23bc47ad94fea95568494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelSpawnData: {fileID: 11400000, guid: a7245d4f14e2f054fa365ffa2365c41d, type: 2}
+  LevelSpawnData: {fileID: 11400000, guid: b3d4e29774017a146b00fda8f13d2801, type: 2}
   ActiveSpawnPoints: []
   SpawnPrefab: {fileID: 2031876733612120223, guid: 9a66c88be38b96043835633105391027,
     type: 3}
