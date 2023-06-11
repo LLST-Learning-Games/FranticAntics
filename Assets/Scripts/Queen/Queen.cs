@@ -161,7 +161,7 @@ namespace  AntQueen
         public void HandleSpawnAnt()
         {
             //if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
-            if (InputUtility.IsButtonDown(_playerNumber, _spawnKey))
+            if (!InputUtility.IsButtonDown(_playerNumber, _spawnKey))
             {
                 _antSpawnStartDelay = 0;
                 _antSpawnButtonDown = false;
