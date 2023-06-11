@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
+using Unity.Mathematics;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -10,44 +13,21 @@ public class EntitySpawner : MonoBehaviour
 
     [Header("Criteria")]
     public float initialDelaySeconds;
-    public float minDelaySeconds;
-    public float maxDelaySeconds;
+    public float minDelaySeconds = 2;
+    public float maxDelaySeconds = 10;
     public int maxActiveEntities;
 
     public bool spawnOnMe;
 
    
     private int spawnCount = 0;
-
-
+    
     private float secondsUntilNextSpawn;
     private List<GameObject> activeEntities = new List<GameObject>();
-
-    [SerializeField] private float spwanHeight = 50;
-    public Transform topLeftSpawnPoint;
-    public Transform bottomRightSpawnPoint;
-    
-    private float spawnXStart;
-    private float spawnXEnd;
-    
-    private float spawnZStart;
-    private float spawnZEnd;
     
     private void Start()
     {
         secondsUntilNextSpawn = initialDelaySeconds;
-
-        spawnXStart = topLeftSpawnPoint.transform.position.x;
-        spawnXEnd = bottomRightSpawnPoint.transform.position.x;
-        
-        spawnZStart = topLeftSpawnPoint.transform.position.z;
-        spawnZEnd = bottomRightSpawnPoint.transform.position.z;
-        
-        // var rand = UnityEngine.Random.Range( spawnXStart, spawnXEnd);;
-        //
-        // Debug.LogWarning($"x {spawnXStart} {spawnXEnd} ");
-        // Debug.LogWarning($"z {spawnZStart} {spawnZEnd}");
-        
     }
 
     private void Update()
@@ -91,6 +71,10 @@ public class EntitySpawner : MonoBehaviour
             if (!entity)
             {
                 activeEntities.RemoveAt(i--);
+                
+                // prevent immediate drop items
+                //secondsUntilNextSpawn = UnityEngine.Random.Range( minDelaySeconds, maxDelaySeconds);
+                
                 continue;
             }
         }
@@ -131,15 +115,21 @@ public class EntitySpawner : MonoBehaviour
 
     protected virtual void SpawnEntity(Entity entity)
     {
-        // todo have a look
         
-        var randX = UnityEngine.Random.Range( spawnXStart, spawnXEnd);
-        var randZ = UnityEngine.Random.Range( spawnZStart, spawnZEnd);
+        GameObject obj = Instantiate(entity.prefab, transform, false);
         
+        SpawnableEntitiy spawnableEntity = obj.GetComponent<SpawnableEntitiy>();
+
         
-        // Debug.LogWarning($"result {randX} {spwanHeight} {randZ}");
+        var startPos = transform.position;
+
+        var endingPos = new UnityEngine.Vector3(startPos.x, 0.0f, startPos.z);
         
-        GameObject obj = Instantiate(entity.prefab, new Vector3(randX, spwanHeight, randZ), Quaternion.identity);
+        // Debug.LogWarning($"startPos: {startPos}");
+        // Debug.LogWarning($"endingPos: {endingPos}");
+        
+        spawnableEntity.Initialise(startPos, endingPos);
+        
         
         if (!spawnOnMe)
             obj.transform.SetParent(transform.parent, true);

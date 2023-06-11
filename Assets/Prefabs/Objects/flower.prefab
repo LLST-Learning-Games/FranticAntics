@@ -97,10 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableEntities:
-  - prefab: {fileID: 1509136715491528997, guid: 7bac81e447b3a834393acf4f1af09b14,
+  - prefab: {fileID: 1509136715491528997, guid: 6078c290bafe00a4ab4b4569f9d15c6b,
       type: 3}
     weight: 0
   initialDelaySeconds: 0
   minDelaySeconds: 20
+  maxDelaySeconds: 10
   maxActiveEntities: 1
   spawnOnMe: 1
