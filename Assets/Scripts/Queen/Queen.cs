@@ -26,6 +26,11 @@ namespace  AntQueen
         {
             UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
             _antSpawnCooldown = _antSpawnCooldownTime;
+
+            for(int i = 0; i < TeamController.InitialAnts; ++i)
+            {
+                SpawnAnt();
+            }
         }
 
         void Update() 
@@ -61,16 +66,36 @@ namespace  AntQueen
 
         public void HandleSpawnAnt()
         {
-            if(_antSpawnCooldown < 0 && GetTrigger(_playerNumber) > _spawnTriggerThreshold)
+            _antSpawnCooldown -= Time.deltaTime;
+
+            if (!CanSpawnAnt())
             {
-                var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
-                newAnt.TeamController = TeamController;
-                newAnt.Initialize();
-                
-                _antSpawnCooldown = _antSpawnCooldownTime;
+                return;
             }
 
-            _antSpawnCooldown -= Time.deltaTime;
+            if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
+            {
+                return;
+            }
+
+            SpawnAnt();
+            _antSpawnCooldown = _antSpawnCooldownTime;
+            TeamController.Nectar -= TeamController.AntNectarCost;
+        }
+
+        private bool CanSpawnAnt()
+        {
+            if (_antSpawnCooldown > 0)
+                return false;
+
+            return TeamController.Nectar >= TeamController.AntNectarCost;
+        }
+
+        private void SpawnAnt()
+        {
+            var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
+            newAnt.TeamController = TeamController;
+            newAnt.Initialize();
         }
 
         private Vector2 GetController(string stick, int controller)
@@ -89,17 +114,6 @@ namespace  AntQueen
         public Vector3 GetForward()
         {
             return _playerModel.forward;
-        }
-        
-        private void HandleMovementNewInput()
-        { 
-            //Vector3 movement = new Vector3(_queenInput.movement.x, 0, _queenInput.movement.y);
-            //transform.Translate(movement * Time.deltaTime * _speed);
-            ////transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (movement), Time.deltaTime * 40f);
-            //_animator.speed = movement.magnitude * _speed;
-            
-            //Vector3 target = new Vector3(_queenInput.target.x, 0, _queenInput.target.y);
-            //_targetObject.transform.SetLocalPositionAndRotation(target * _targetDistance, Quaternion.identity);
         }
     }   
 }
