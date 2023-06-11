@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Team;
 using UnityEngine;
 using Worker.State;
 
@@ -22,7 +23,7 @@ namespace Worker
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
-                if(workerAntController.Status != WorkerAntStatus.CollectFood)
+                if(workerAntController.Status != WorkerAntStatus.CollectFood || workerAntController.Status != WorkerAntStatus.Attack)
                     workerAntController.Whistle(Vector3.zero);
             }
         }
@@ -49,6 +50,10 @@ namespace Worker
         {
             if (_allWorkerAnts.Contains(workerAntController))
                 _allWorkerAnts.Remove(workerAntController);
+            
+            DefenseManager.RemoveAntFromDefense(workerAntController);
+
+            workerAntController.TeamController.workers.Remove(workerAntController);
         }
     }
 }

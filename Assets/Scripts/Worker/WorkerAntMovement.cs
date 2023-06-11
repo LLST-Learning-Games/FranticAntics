@@ -6,6 +6,8 @@ namespace Worker
     public class WorkerAntMovement : MonoBehaviour
     {
         private WorkerAntController _workerAntController;
+
+        public Animator Animator => _animator;
         
         [SerializeField] protected NavMeshAgent _navMeshAgent;
         [SerializeField] protected Animator _animator;
@@ -66,6 +68,13 @@ namespace Worker
         {
             Debug.Log("[WorkerAntController] Ant started moving");
             PlayMovementAnimation();
+        }
+
+        public void Disable()
+        {
+            _navMeshAgent.Stop();
+            _navMeshAgent.enabled = false;
+            enabled = false;
         }
     }
 }

@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 3396216706517529867}
   - component: {fileID: 5944238163239718533}
   - component: {fileID: 7978210501222194550}
+  - component: {fileID: 95735361611976361}
   - component: {fileID: 6104174768137077150}
   - component: {fileID: 1947846538759714722}
   m_Layer: 7
@@ -867,6 +868,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 267870320497785133}
   _antMovement: {fileID: 5999120274337963013}
   _antStatistics: {fileID: 7978210501222194550}
+  IsDead: 0
   Status: 0
 --- !u!114 &5999120274337963013
 MonoBehaviour:
@@ -946,6 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a07f919b3394c679bd317b09e86cc84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackDuration: 2
 --- !u!114 &5944238163239718533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +979,19 @@ MonoBehaviour:
   _defaultHp: 3
   _defaultMovementSpeed: 2
   _defaultAttackPower: 1
+--- !u!114 &95735361611976361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5430756129966660757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2db86c3db0410f869e0c5b3ca20127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _workerAntController: {fileID: 2768702229430445444}
 --- !u!135 &6104174768137077150
 SphereCollider:
   m_ObjectHideFlags: 0
