@@ -15,6 +15,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _timer;
         [SerializeField] private TextMeshProUGUI _playerOneScore;
         [SerializeField] private TextMeshProUGUI _playerTwoScore;
+        [SerializeField] private TextMeshProUGUI _winnerLabel;
         [SerializeField] private TeamManager _teamManager;
         
         [SerializeField] private float _roundTimeLimit;
@@ -38,8 +39,8 @@ namespace UI
         // Update is called once per frame
         void Update()
         {
-            //_playerOneScore.text = _teamManager.TeamOne.score;
-            //_playerTwoScore.text = _teamManager.TeamTwo.score;
+            _playerOneScore.text = _teamManager.TeamOne.Score.ToString();
+            _playerTwoScore.text = _teamManager.TeamTwo.Score.ToString();
             
             _roundTimeRemaining -= Time.deltaTime;
             _timer.text = $"{_roundTimeRemaining:0.##}";
@@ -51,8 +52,26 @@ namespace UI
 
         private void GameOver()
         {
+            UpdateGameOverLabel();
             _gameOverObjects.SetActive(true);
             Time.timeScale = 0.0f;
+        }
+
+        private void UpdateGameOverLabel()
+        {
+
+            if (_teamManager.TeamOne.Score - _teamManager.TeamTwo.Score <= Double.Epsilon)
+            {
+                _winnerLabel.text = "It's a tie!";
+                return;
+            }
+            if (_teamManager.TeamOne.Score > _teamManager.TeamTwo.Score)
+            {
+                _winnerLabel.text = "Colony One Wins!";
+                return;
+            }
+            _winnerLabel.text = "Colony Two Wins!";
+            
         }
     }
 }

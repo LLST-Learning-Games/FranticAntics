@@ -225,9 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8f9be67b92fea49bde308762939678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOnObjects: {fileID: 833516837384462127}
+  _gameOverObjects: {fileID: 9093863756179572046}
   _timer: {fileID: 6656851495649869929}
   _playerOneScore: {fileID: 6656851495256617686}
   _playerTwoScore: {fileID: 6656851494828405154}
+  _winnerLabel: {fileID: 8937266933217441609}
   _teamManager: {fileID: 0}
   _roundTimeLimit: 5
 --- !u!1 &4900413096139858749
