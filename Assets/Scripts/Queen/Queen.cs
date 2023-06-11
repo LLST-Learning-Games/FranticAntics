@@ -17,6 +17,7 @@ namespace  AntQueen
         [SerializeField] private float _spawnTriggerThreshold = 0.5f;
         [SerializeField] private WorkerAntController _antPrefab;
         [SerializeField] private Animator _animator;
+        [SerializeField] private float _whistleRange;
 
         [Header("Controls")]
         [SerializeField] private ControllerButtonDirection _sendKey = ControllerButtonDirection.South;
@@ -30,6 +31,10 @@ namespace  AntQueen
         [SerializeField] private float _sendAntMovementPauseCooldownTime = 0.5f;
         [SerializeField] private float _sendAntCooldownTime = 0.2f;
 
+        [Header("Particles/Animations")]
+        [SerializeField] private ParticleSystem _whistleParticleSystem;
+        [SerializeField] private float _whistleScaler = 0.5f;
+        [SerializeField] private ParticleSystem _calloutParticleSystem;
 
         private bool _antSpawnButtonDown = false;
         private float _antSpawnStartDelay;
@@ -137,12 +142,17 @@ namespace  AntQueen
             {
                 //Debug.LogWarning("A button calling");
                 SendWorkerAntForSearch();
+                _calloutParticleSystem.gameObject.SetActive(true);
+                _calloutParticleSystem.Play();
             }
 
             else if(InputUtility.IsButtonDown(_playerNumber, _recallKey))
             {
                 //Debug.LogWarning("B button calling");
-                TeamController.WorkerAntManager.Whistle();
+                TeamController.WorkerAntManager.Whistle(_whistleRange, transform.position);
+                _whistleParticleSystem.gameObject.SetActive(true);
+                _whistleParticleSystem.transform.localScale = Vector3.one * _whistleRange * _whistleScaler;
+                _whistleParticleSystem.Play();
             }
         }
 
