@@ -11,6 +11,8 @@ namespace Worker.State
 
         public CollectableItem TargetCollectable;
 
+        private Transform _endDestination;
+        
         private bool _itemCollected;
         
         public override void Activate()
@@ -30,6 +32,10 @@ namespace Worker.State
             TargetCollectable = item;
             
             _workerAntController.SetDestination(TargetCollectable.transform.position);
+
+            _endDestination = TargetCollectable.ForQueen
+                ? _workerAntController.TeamController.Queen.transform
+                : _workerAntController.TeamController.Colony.transform;
         }
         
         protected override void UpdateState()
@@ -54,7 +60,16 @@ namespace Worker.State
             }
             else if (_itemCollected && TargetCollectable.ItemCollected)
             {
-                _workerAntController.SetDestination(_workerAntController.TeamController.Queen.transform.position);
+                _workerAntController.SetDestination(_endDestination.position);
+
+                if (Vector3.Distance(transform.position, _endDestination.position) < .5f)
+                {
+                    TargetCollectable.transform.SetParent(null);
+                    TargetCollectable.transform.DOScale(Vector3.zero, .2f);
+                    TargetCollectable.transform.DOMove(_endDestination.position, .2f);
+                    
+                    _workerAntController.Whistle(Vector3.zero);
+                }
             }
         }
     }
