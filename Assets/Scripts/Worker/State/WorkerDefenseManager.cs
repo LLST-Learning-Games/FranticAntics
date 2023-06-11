@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Team;
 using UnityEngine;
@@ -6,9 +7,13 @@ namespace Worker.State
 {
     public class WorkerDefenseManager : MonoBehaviour
     {
+        private const int BASE_DEFENSE_COUNT = 6;
+        
         [SerializeField] private TeamController _teamController;
         [SerializeField] private List<WorkerAntController> _defenceAnts;
 
+        [SerializeField] private float _lineRange = 1f;
+        
         public void AddAntToDefense(WorkerAntController workerAntController)
         {
             if(_defenceAnts.Contains(workerAntController))
@@ -38,24 +43,48 @@ namespace Worker.State
                 return;
 
             var tempObject = new GameObject("temp");
-            var angle = 360 / (_defenceAnts.Count > 6 ? 6 : _defenceAnts.Count);
 
             tempObject.transform.position = _teamController.Queen.transform.position;
             tempObject.transform.eulerAngles = _teamController.Queen.transform.eulerAngles;
+            
+            var lineCount = GetDefenseLineCount();
+            var antIndex = 0;
 
-            var index = 0;
-            foreach (var antController in _defenceAnts)
+            for (var line = 0; line < lineCount; line++)
             {
-                if(antController.GetCurrentStateController() is not WorkerDefenceState defenceState)
-                    continue;
+                var antCountInLine = BASE_DEFENSE_COUNT * (int)Math.Pow(2, line);
+                var angle = 360 / antCountInLine;
+                
+                for (var xx = 0; xx < antCountInLine; xx++)
+                {
+                    if(antIndex >= _defenceAnts.Count)
+                        break;
 
-                defenceState.DefencePositionOffset = tempObject.transform.forward.normalized * ((index / 6) + 1);
-                tempObject.transform.eulerAngles += new Vector3(0, angle, 0);
+                    var antController = _defenceAnts[antIndex];
+                    if(antController.GetCurrentStateController() is not WorkerDefenceState defenceState)
+                        continue;
+                
+                    defenceState.DefencePositionOffset = tempObject.transform.forward.normalized * (line + _lineRange);
+                    tempObject.transform.eulerAngles += new Vector3(0, angle, 0);
+                
+                    antIndex++;
+                }
+            }
 
-                index++;
+            Destroy(tempObject);
+        }
+
+        private int GetDefenseLineCount()
+        {
+            var antCount = _defenceAnts.Count;
+            var lineCount = 0;
+            while (antCount > 0)
+            {
+                antCount -= BASE_DEFENSE_COUNT * (int) Math.Pow(2, lineCount);
+                lineCount++;
             }
             
-            Destroy(tempObject);
+            return lineCount;
         }
     }
 }

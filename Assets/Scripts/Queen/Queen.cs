@@ -49,6 +49,11 @@ namespace  AntQueen
 
         void Update() 
         {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SpawnAnt();
+            }
+                
             HandleMovement();
             HandleTarget();
             HandleCommand();
