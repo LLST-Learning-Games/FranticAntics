@@ -99,6 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForQueen: 0
   SpeedMultiplier: 1
+  Mineable: 1
+  _minedPiecePrefab: {fileID: 269119627994671035, guid: adba297067d34644ea76e6abd606546c,
+    type: 3}
+  ItemCollected: 0
 --- !u!65 &8181983213409042293
 BoxCollider:
   m_ObjectHideFlags: 0

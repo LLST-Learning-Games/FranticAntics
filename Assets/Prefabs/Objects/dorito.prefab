@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 3929778693947774007}
   - component: {fileID: 82959749987490706}
   - component: {fileID: 2792878531296112472}
-  m_Layer: 0
+  - component: {fileID: 4690620848138651873}
+  - component: {fileID: 8261319372830280450}
+  m_Layer: 6
   m_Name: dorito
-  m_TagString: Untagged
+  m_TagString: collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4690620848138651873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450313214207954573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.164897, y: 0.22518796, z: 1.0000795}
+  m_Center: {x: -0.17811394, y: 0.11109011, z: 0.018564641}
+--- !u!114 &8261319372830280450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450313214207954573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02457fd72cfd424f9e6fd2afc3fea953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForQueen: 0
+  SpeedMultiplier: 1
+  Mineable: 0
+  _minedPiecePrefab: {fileID: 0}
+  ItemCollected: 0

@@ -22,7 +22,8 @@ namespace Worker
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
-                workerAntController.Whistle(Vector3.zero);
+                if(workerAntController.Status != WorkerAntStatus.CollectFood)
+                    workerAntController.Whistle(Vector3.zero);
             }
         }
 
