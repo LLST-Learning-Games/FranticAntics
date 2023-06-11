@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForQueen: 0
   SpeedMultiplier: 1
+  Mineable: 1
+  ItemCollected: 0
 --- !u!65 &8181983213409042293
 BoxCollider:
   m_ObjectHideFlags: 0

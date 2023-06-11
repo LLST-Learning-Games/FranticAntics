@@ -9,7 +9,18 @@ namespace Entities
         public bool ForQueen;
 
         public float SpeedMultiplier = 1f;
+        public bool Mineable;
+        [SerializeField] private GameObject _minedPiecePrefab;
 
-        [FormerlySerializedAs("Collected")] public bool ItemCollected;
+        [HideInInspector] public bool ItemCollected;
+
+        public GameObject Mine()
+        {
+            if (!Mineable)
+                return null;
+
+            var piece = Instantiate(_minedPiecePrefab, transform);
+            return piece;
+        }
     }
 }

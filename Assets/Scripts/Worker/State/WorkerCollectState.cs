@@ -11,6 +11,7 @@ namespace Worker.State
 
         public CollectableItem TargetCollectable;
 
+        private GameObject _collectedPiece;
         private Transform _endDestination;
         
         private bool _itemCollected;
@@ -25,6 +26,12 @@ namespace Worker.State
         public override void Deactivate()
         {
             base.Deactivate();
+
+            TargetCollectable = null;
+            _endDestination = null;
+            _collectedPiece = null;
+            
+            _itemCollected = false;
         }
 
         public void SetTarget(CollectableItem item)
@@ -52,21 +59,27 @@ namespace Worker.State
             {
                 _itemCollected = true;
                 
-                TargetCollectable.transform.SetParent(_carryParent);
-                TargetCollectable.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
+                if(!TargetCollectable.Mineable)
+                    _collectedPiece = TargetCollectable.gameObject;
+                else
+                    _collectedPiece = TargetCollectable.Mine();
+                
+                _collectedPiece.transform.SetParent(_carryParent);
+                _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
                 {
-                    TargetCollectable.ItemCollected = true;
+                    if(!TargetCollectable.Mineable)
+                        TargetCollectable.ItemCollected = true;
                 });
             }
-            else if (_itemCollected && TargetCollectable.ItemCollected)
+            else if (_itemCollected && _collectedPiece != null)
             {
                 _workerAntController.SetDestination(_endDestination.position);
 
                 if (Vector3.Distance(transform.position, _endDestination.position) < .5f)
                 {
-                    TargetCollectable.transform.SetParent(null);
-                    TargetCollectable.transform.DOScale(Vector3.zero, .2f);
-                    TargetCollectable.transform.DOMove(_endDestination.position, .2f);
+                    _collectedPiece.transform.SetParent(null);
+                    _collectedPiece.transform.DOScale(Vector3.zero, .2f);
+                    _collectedPiece.transform.DOMove(_endDestination.position, .2f);
                     
                     _workerAntController.Whistle(Vector3.zero);
                 }
