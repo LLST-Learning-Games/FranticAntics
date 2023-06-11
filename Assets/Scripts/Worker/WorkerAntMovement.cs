@@ -7,7 +7,6 @@ namespace Worker
     {
         private WorkerAntController _workerAntController;
         
-        [SerializeField] protected Transform _navMeshTarget;
         [SerializeField] protected NavMeshAgent _navMeshAgent;
         [SerializeField] protected Animator _animator;
         
@@ -21,9 +20,6 @@ namespace Worker
         
         public void ProcessAntMovement()
         {
-            if(_navMeshTarget != null)
-                SetDestination(_navMeshTarget.position);
-            
             if(_navMeshAgent.path == null)
                 return;
 
