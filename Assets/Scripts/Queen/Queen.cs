@@ -91,7 +91,7 @@ namespace  AntQueen
             
             if(CanMove())
             {
-                _animator.SetBool("IsCommanding",false);
+                //_animator.SetBool("IsCommanding",false);
                 transform.Translate(movement * Time.deltaTime * _speed);
                 _animator.speed = movement.magnitude * _speed;
             }
