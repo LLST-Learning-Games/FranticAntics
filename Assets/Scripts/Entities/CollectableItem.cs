@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Team;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Worker;
 
 namespace Entities
 {
@@ -11,11 +13,14 @@ namespace Entities
         [Header("Settings")]
         public bool ForQueen;
         public bool Mineable;
+        public int MinAssignedAntsForPickup = 1;
+        public List<WorkerAntController> AntsAssigned;
 
         [Header("Modifiers")]
         public float SpeedMultiplier = 1f;
         public AnimationCurve SizeFromResourcesRemaining;
 
+        
         [Header("Resources")]
         public Resource Resource;
         public float TotalResources;
@@ -49,9 +54,13 @@ namespace Entities
             ResourcesRemaining -= result;
 
             UpdateMineIndicators();
-
+            
             return result;
         }
+
+        public virtual void AssignAnt(WorkerAntController ant) => AntsAssigned.Add(ant);
+        public virtual void UnassignAnt(WorkerAntController ant) => AntsAssigned.Remove(ant);
+        public bool HasEnoughAntsToCarry() => AntsAssigned.Count >= MinAssignedAntsForPickup;
 
         private void UpdateMineIndicators()
         {

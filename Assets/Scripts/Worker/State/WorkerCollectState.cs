@@ -13,7 +13,8 @@ namespace Worker.State
 
         private GameObject _collectedPiece;
         private Transform _endDestination;
-        
+
+        private bool _waitingForEnoughToCollect;
         private bool _itemCollected;
         private float _resourcesCollected;
         
@@ -64,6 +65,15 @@ namespace Worker.State
 
                 if (!_itemCollected && Vector3.Distance(TargetCollectable.transform.position, transform.position) < .5f)
                 {
+                    if(!_waitingForEnoughToCollect)
+                        TargetCollectable.AssignAnt(_workerAntController);
+
+                    if (!TargetCollectable.HasEnoughAntsToCarry())
+                    {
+                        _waitingForEnoughToCollect = true;
+                        return;
+                    }
+                        
                     _itemCollected = true;
                     _resourcesCollected = TargetCollectable.GetResources();
                 
@@ -111,6 +121,7 @@ namespace Worker.State
                 return;
             }
             
+            TargetCollectable.UnassignAnt(_workerAntController);
             TargetCollectable.transform.SetParent(null);
             TargetCollectable.ItemCollected = false;
         }
