@@ -27,7 +27,7 @@ public class EntitySpawner : MonoBehaviour
     
     private void Start()
     {
-        secondsUntilNextSpawn = initialDelaySeconds;
+        secondsUntilNextSpawn = initialDelaySeconds + UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
     }
 
     private void Update()
@@ -67,7 +67,7 @@ public class EntitySpawner : MonoBehaviour
                 activeEntities.RemoveAt(i--);
                 
                 // prevent immediate drop items
-                //secondsUntilNextSpawn = UnityEngine.Random.Range( minDelaySeconds, maxDelaySeconds);
+                secondsUntilNextSpawn = UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
                 
                 continue;
             }
@@ -79,7 +79,7 @@ public class EntitySpawner : MonoBehaviour
         Entity entityToSpawn = PickRandomEntity();
         SpawnEntity(entityToSpawn);
         spawnCount++;
-        secondsUntilNextSpawn = UnityEngine.Random.Range( minDelaySeconds, maxDelaySeconds);
+        secondsUntilNextSpawn = UnityEngine.Random.Range(minDelaySeconds, maxDelaySeconds);
     }
 
     private Entity PickRandomEntity()
