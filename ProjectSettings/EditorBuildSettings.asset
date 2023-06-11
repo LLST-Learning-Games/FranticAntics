@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 755afe99fb08a2d4dbd1bcbee507e3b9
   - enabled: 1
+    path: Assets/Scenes/level_park.unity
+    guid: 72fd69fdbc4a6d546a0c149041e58234
+  - enabled: 1
     path: Assets/Scenes/Test_Umut.unity
     guid: 9d8499ad964974a8d8639a5cf4fd3707
   - enabled: 1
