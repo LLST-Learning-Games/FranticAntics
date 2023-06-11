@@ -16,7 +16,7 @@ public class ControllerTester : MonoBehaviour
 
     private void UpdateImage(ControllerIndicator indicator)
     {
-        bool isPressed = InputUtility.IsButtonDown(controllerIndex, indicator.direction);
+        bool isPressed = InputUtility.IsButtonPressed(controllerIndex, indicator.direction);
         indicator.image.color = isPressed ? Color.green : Color.white;
     }
 

@@ -32,6 +32,18 @@ public static class InputUtility
         }
     }
 
+    public static bool IsButtonPressed(int controllerIndex, ControllerButtonDirection direction)
+    {
+        try
+        {
+            return Input.GetButton(GetKeyString(controllerIndex, direction));
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public static bool IsButtonUp(int controllerIndex, ControllerButtonDirection direction)
     {
         return Input.GetButtonUp(GetKeyString(controllerIndex, direction));
