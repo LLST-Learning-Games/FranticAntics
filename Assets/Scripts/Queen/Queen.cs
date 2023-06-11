@@ -160,28 +160,21 @@ namespace  AntQueen
 
         public void HandleSpawnAnt()
         {
-            //if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
-            if (!InputUtility.IsButtonDown(_playerNumber, _spawnKey))
+            if (_antSpawnStartDelay > 0.0f)
+                return;
+
+            if (!InputUtility.IsButtonPressed(_playerNumber, _spawnKey))
             {
-                _antSpawnStartDelay = 0;
-                _antSpawnButtonDown = false;
+                _antSpawnStartDelay = _antSpawnStartDelayTime;
                 return;
             }
 
-            if (!_antSpawnButtonDown)
-            {
-                // todo: cue straining animation
-                Debug.Log("Start straining now");
-                _antSpawnStartDelay = _antSpawnStartDelayTime;
-            }
-            
-            _antSpawnButtonDown = true;
+            if (_antSpawnCooldown > 0.0f)
+                return;
 
             if (!CanSpawnAnt())
-            {
                 return;
-            }
-            
+
             SpawnAnt();
             _antSpawnCooldown = _antSpawnCooldownTime;
             TeamController.Nectar -= TeamController.AntNectarCost;
@@ -189,12 +182,6 @@ namespace  AntQueen
 
         private bool CanSpawnAnt()
         {
-            if (_antSpawnStartDelay > 0)
-                return false;
-            
-            if (_antSpawnCooldown > 0)
-                return false;
-
             return TeamController.Nectar >= TeamController.AntNectarCost;
         }
 
