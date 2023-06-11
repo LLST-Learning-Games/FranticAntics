@@ -48,7 +48,7 @@ namespace UI
             _playerTwoScore.text = _teamManager.TeamTwo.Score.ToString();
             
             _roundTimeRemaining -= Time.deltaTime;
-            _timer.text = $"{_roundTimeRemaining:0.##}";
+            _timer.text = $"{_roundTimeRemaining:0}";
             if (_roundTimeRemaining <= 0.0f)
             {
                 GameOver();
