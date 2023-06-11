@@ -23,8 +23,10 @@ namespace Worker
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
-                if(workerAntController.Status != WorkerAntStatus.CollectFood || workerAntController.Status != WorkerAntStatus.Attack)
-                    workerAntController.Whistle(Vector3.zero);
+                if(workerAntController.Status == WorkerAntStatus.CollectFood || workerAntController.Status == WorkerAntStatus.Attack)
+                    continue;
+                
+                workerAntController.Whistle(Vector3.zero);
             }
         }
 
