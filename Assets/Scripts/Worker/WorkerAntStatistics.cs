@@ -9,9 +9,9 @@ namespace Worker
         private WorkerAntController _workerAntController;
         [SerializeField] protected NavMeshAgent _navMeshAgent;
 
-        [SerializeField][Range(1, 10)] private int _defaultHp = 3;
-        [SerializeField][Range(0, 5)] private float _defaultMovementSpeed = 2;
-        [SerializeField][Range(1, 10)] private int _defaultAttackPower = 1;
+        [SerializeField] private int _defaultHp = 3;
+        [SerializeField] private float _defaultMovementSpeed = 2;
+        [SerializeField] private int _defaultAttackPower = 1;
         
         private int _hp = 3;
         private float _movementSpeed = 2;
@@ -21,7 +21,7 @@ namespace Worker
         public float MovementSpeed => _movementSpeed;
         public int AttackPower => _attackPower;
         
-        private void Start()
+        private void Awake()
         { 
             ResetToDefaultValues();
         }
