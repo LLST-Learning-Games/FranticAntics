@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d2375c8645a41b09858761e949326fe, type: 3}
-  m_Name: Obstacle1
+  m_Name: Flower1
   m_EditorClassIdentifier: 
-  MapPosition: {x: 36, y: 0, z: 20}
-  Type: 1
+  MapPosition: {x: 30, y: 0, z: 10}
+  Type: 2
+  PrefabOverride: {fileID: 7834060009943693478, guid: 6fbf39a5002ae9e48a502f4023ac20a7,
+    type: 3}
+  RotationOverride: {x: 0, y: 0, z: 0}
