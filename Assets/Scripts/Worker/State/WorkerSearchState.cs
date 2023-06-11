@@ -78,5 +78,25 @@ namespace Worker.State
             _workerAntController.ChangeState(WorkerAntStatus.CollectFood);
             (_workerAntController.GetCurrentStateController() as WorkerCollectState).SetTarget(collectableItem);
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if(!_isActive)
+                return;
+
+            if(!other.transform.CompareTag("collectable"))
+                return;
+
+            CollectableItem collectableItem = other.GetComponent<CollectableItem>();
+
+            if (collectableItem == null)
+                return;
+
+            if (collectableItem.ResourcesRemaining <= 0 || collectableItem.ItemCollected)
+                return;
+
+            _workerAntController.ChangeState(WorkerAntStatus.CollectFood);
+            (_workerAntController.GetCurrentStateController() as WorkerCollectState).SetTarget(collectableItem);
+        }
     }
 }

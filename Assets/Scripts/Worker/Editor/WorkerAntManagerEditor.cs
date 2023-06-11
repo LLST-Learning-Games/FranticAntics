@@ -17,11 +17,6 @@ namespace Worker.Editor
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            if (GUILayout.Button("Whistle"))
-            {
-                _workerAntManager.Whistle();
-            }
         }
     }
 }

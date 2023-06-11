@@ -13,7 +13,8 @@ namespace Worker.State
 
         private GameObject _collectedPiece;
         private Transform _endDestination;
-        
+
+        private bool _waitingForEnoughToCollect;
         private bool _itemCollected;
         private float _resourcesCollected;
         
@@ -29,6 +30,8 @@ namespace Worker.State
         public override void Deactivate()
         {
             _workerAntController.OnAntDead -= OnAntDead;
+            
+            HandleDisruptedCarry();
             
             base.Deactivate();
 
@@ -59,25 +62,46 @@ namespace Worker.State
 
             try
             {
-                if(TargetCollectable.ItemCollected && !_itemCollected)
-                    _workerAntController.Whistle(Vector3.zero);
-
-                if (!_itemCollected && Vector3.Distance(TargetCollectable.transform.position, transform.position) < .5f)
+                if (TargetCollectable.ItemCollected && !_itemCollected)
                 {
+                    _workerAntController.Whistle(Vector3.zero);
+                }
+
+                if (!_itemCollected 
+                    && Vector3.Distance(TargetCollectable.transform.position, transform.position) < TargetCollectable.AssignmentWaitDistance)
+                {
+                    if(!_waitingForEnoughToCollect)
+                        TargetCollectable.AssignAnt(_workerAntController);
+
+                    if (!TargetCollectable.HasEnoughAntsToCarry())
+                    {
+                        // Set strain animation and sweat effects
+                        _workerAntController.SetDestination(transform.position);
+                        _waitingForEnoughToCollect = true;
+                        return;
+                    }
+                        
                     _itemCollected = true;
-                    _resourcesCollected = TargetCollectable.GetResources();
-                
-                    if(!TargetCollectable.Mineable)
-                        _collectedPiece = TargetCollectable.gameObject;
-                    else
-                        _collectedPiece = TargetCollectable.Mine();
-                
-                    _collectedPiece.transform.SetParent(_carryParent);
-                    _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
+                    
+                    if(TargetCollectable.Mineable || TargetCollectable.CheckIfPrimaryCarrier(_workerAntController))
                     {
                         if(!TargetCollectable.Mineable)
-                            TargetCollectable.ItemCollected = true;
-                    });
+                        {
+                            _collectedPiece = TargetCollectable.gameObject;
+                        }
+                        else
+                        {
+                            _collectedPiece = TargetCollectable.Mine();
+                        }
+                        
+                        _resourcesCollected = TargetCollectable.GetResources();
+                        _collectedPiece.transform.SetParent(_carryParent);
+                        _collectedPiece.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() =>
+                        {
+                            if (!TargetCollectable.Mineable)
+                                TargetCollectable.ItemCollected = true;
+                        });
+                    }
                 }
                 else if (_itemCollected && _collectedPiece != null)
                 {
@@ -89,7 +113,6 @@ namespace Worker.State
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
                         TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
-                        Destroy(TargetCollectable.gameObject);
 
                         _workerAntController.Whistle(Vector3.zero);
                     }
@@ -97,9 +120,12 @@ namespace Worker.State
             }
             catch (Exception e)
             {
+                if(TargetCollectable)
+                    TargetCollectable.UnassignAnt(_workerAntController);
                 _workerAntController.Whistle(Vector3.zero);
             }
         }
+        
         
         private void OnAntDead()
         {
@@ -111,9 +137,38 @@ namespace Worker.State
                 Destroy(_collectedPiece);
                 return;
             }
-            
+
+            HandleDisruptedCarry();
+        }
+
+        private void HandleDisruptedCarry()
+        {
+            if(TargetCollectable)
+                TargetCollectable.UnassignAnt(_workerAntController);
+
+            if (!TargetCollectable.HasEnoughAntsToCarry())
+            {
+                TargetCollectable.HandleLostAssignedAnts();
+                TargetCollectable.transform.SetParent(null);
+                return;
+            }
+
+            // If there are still enough ants to carry the cheeto, make another ant lead ant
+            if (TargetCollectable.transform.parent == _carryParent
+                && TargetCollectable.AntsAssigned[0].GetCurrentStateController() is WorkerCollectState state)
+            {
+                state.AssignThisAntAsLeadCarrier(TargetCollectable);
+                return;
+            }
+
             TargetCollectable.transform.SetParent(null);
-            TargetCollectable.ItemCollected = false;
+        }
+
+        public void AssignThisAntAsLeadCarrier(CollectableItem target)
+        {
+            target.transform.SetParent(_carryParent);
+            _collectedPiece = target.gameObject;
+            _resourcesCollected = target.GetResources();
         }
     }
 }

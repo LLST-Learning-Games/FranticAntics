@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768396742248474730}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 3.1212997, y: 3.1213, z: 3.1212997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForQueen: 0
   Mineable: 1
+  MinAssignedAntsForPickup: 1
+  AntsAssigned: []
+  AssignmentWaitDistance: 1
   SpeedMultiplier: 1
   SizeFromResourcesRemaining:
     serializedVersion: 2
@@ -126,7 +129,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Resource: 0
   TotalResources: 1000
-  ResourcesPerPickup: 100
+  ResourcesPerPickup: 10
   _minedPiecePrefab: {fileID: 269119627994671035, guid: adba297067d34644ea76e6abd606546c,
     type: 3}
   ResourcesRemaining: 0

@@ -39,12 +39,6 @@ public class EntitySpawner : MonoBehaviour
         {
             SpawnRandomEntity();
         }
-
-
-        // var oldPos = transform.position;
-        // float newY = oldPos.y * Time.deltaTime * 0.01f;
-        //
-        // transform.position = new Vector3(oldPos.x, newY, oldPos.z);
     }
 
     private bool CanSpawnEntities()
@@ -115,7 +109,6 @@ public class EntitySpawner : MonoBehaviour
 
     protected virtual void SpawnEntity(Entity entity)
     {
-        
         GameObject obj = Instantiate(entity.prefab, transform, false);
         
         SpawnableEntitiy spawnableEntity = obj.GetComponent<SpawnableEntitiy>();
@@ -134,6 +127,17 @@ public class EntitySpawner : MonoBehaviour
         if (!spawnOnMe)
             obj.transform.SetParent(transform.parent, true);
         activeEntities.Add(obj);
+
+
+
+        // old code
+        //GameObject obj = Instantiate(entity.prefab, transform, false);
+
+        //if (!spawnOnMe)
+        //    obj.transform.SetParent(transform.parent, true);
+        //activeEntities.Add(obj);
+
+        
     }
 
     #region Embedded Types
