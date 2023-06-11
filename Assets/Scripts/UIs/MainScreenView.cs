@@ -10,12 +10,31 @@ namespace UI
         [SerializeField] private GameObject _gameModeScreenGO;
         [SerializeField] private GameObject _creditsScreenGO;
         [SerializeField] private int _levelSceneIndex;
+        
+        [Header("Controller Buttons")]
+        [SerializeField] private ControllerButtonDirection _startKey = ControllerButtonDirection.South;
+        [SerializeField] private ControllerButtonDirection _creditsKey = ControllerButtonDirection.East;
 
         private UIState _uiState;
 
         private void Start()
         {
             SwitchUIState(UIState.Intro);
+        }
+
+        private void Update()
+        {
+            if (InputUtility.IsButtonDown(0, _startKey) || InputUtility.IsButtonDown(1, _startKey))
+            {
+                OnTwoPlayerGameStartsClicked();
+            }
+            else if (InputUtility.IsButtonDown(0, _creditsKey) || InputUtility.IsButtonDown(1, _creditsKey))
+            {
+                if(_uiState == UIState.Intro)
+                    OnCreditsButtonClicked();
+                else
+                    OnBackButtonClicked();
+            }
         }
 
         private void SwitchUIState(UIState state)
