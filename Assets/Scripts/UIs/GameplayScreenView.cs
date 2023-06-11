@@ -13,7 +13,10 @@ namespace UI
     {
         [Header("Controller Buttons")]
         [SerializeField] private ControllerButtonDirection _startKey = ControllerButtonDirection.South;
-        
+
+        [Header("Sounds")]
+        [SerializeField] private AudioClip backgroundClip;
+
         [Header("UI")]
         [SerializeField] private GameObject _gameOnObjects;
         [SerializeField] private GameObject _gameOverObjects;
@@ -32,6 +35,10 @@ namespace UI
         void Start()
         {
             SetupRound();
+            AudioSource listener = gameObject.AddComponent<AudioSource>();
+            listener.clip = backgroundClip;
+            listener.loop = true;
+            listener.Play();
         }
 
         private void SetupRound()
