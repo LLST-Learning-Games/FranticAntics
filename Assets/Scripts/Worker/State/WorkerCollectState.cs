@@ -13,7 +13,8 @@ namespace Worker.State
 
         private GameObject _collectedPiece;
         private Transform _endDestination;
-        
+
+        private bool _waitingForEnoughToCollect;
         private bool _itemCollected;
         private float _resourcesCollected;
         
@@ -62,8 +63,20 @@ namespace Worker.State
                 if(TargetCollectable.ItemCollected && !_itemCollected)
                     _workerAntController.Whistle(Vector3.zero);
 
-                if (!_itemCollected && Vector3.Distance(TargetCollectable.transform.position, transform.position) < .5f)
+                if (!_itemCollected 
+                    && Vector3.Distance(TargetCollectable.transform.position, transform.position) < TargetCollectable.AssignmentWaitDistance)
                 {
+                    if(!_waitingForEnoughToCollect)
+                        TargetCollectable.AssignAnt(_workerAntController);
+
+                    if (!TargetCollectable.HasEnoughAntsToCarry())
+                    {
+                        // Set strain animation and sweat effects
+                        _workerAntController.SetDestination(transform.position);
+                        _waitingForEnoughToCollect = true;
+                        return;
+                    }
+                        
                     _itemCollected = true;
                     _resourcesCollected = TargetCollectable.GetResources();
                 
@@ -89,7 +102,6 @@ namespace Worker.State
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
                         TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
-                        Destroy(TargetCollectable.gameObject);
 
                         _workerAntController.Whistle(Vector3.zero);
                     }
@@ -112,6 +124,7 @@ namespace Worker.State
                 return;
             }
             
+            TargetCollectable.UnassignAnt(_workerAntController);
             TargetCollectable.transform.SetParent(null);
             TargetCollectable.ItemCollected = false;
         }
