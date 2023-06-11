@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 755afe99fb08a2d4dbd1bcbee507e3b9
   - enabled: 1
+    path: Assets/Scenes/Test_Umut.unity
+    guid: 9d8499ad964974a8d8639a5cf4fd3707
+  - enabled: 1
     path: Assets/Scenes/Levels/Level_PidgeonPark.unity
     guid: b85b24f18a1713f479eb0982ec6df0b5
   m_configObjects:
