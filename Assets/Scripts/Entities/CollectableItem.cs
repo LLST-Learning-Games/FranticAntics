@@ -26,10 +26,12 @@ namespace Entities
         public float ResourcesRemaining;
 
         [HideInInspector] public bool ItemCollected;
+        private float initialScale;
 
         private void Start()
         {
             ResourcesRemaining = TotalResources;
+            initialScale = transform.lossyScale.x;
         }
 
         public GameObject Mine()
@@ -57,7 +59,7 @@ namespace Entities
                 return;
 
             float resourcesPercentRemaining = ResourcesRemaining / TotalResources;
-            float scale = SizeFromResourcesRemaining.Evaluate(resourcesPercentRemaining);
+            float scale = SizeFromResourcesRemaining.Evaluate(resourcesPercentRemaining) * initialScale;
 
             if (ResourcesRemaining <= 0)
                 scale = 0.0f;
