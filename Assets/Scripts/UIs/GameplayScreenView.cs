@@ -11,6 +11,10 @@ namespace UI
 {
     public class GameplayScreenView : MonoBehaviour
     {
+        [Header("Controller Buttons")]
+        [SerializeField] private ControllerButtonDirection _startKey = ControllerButtonDirection.South;
+        
+        [Header("UI")]
         [SerializeField] private GameObject _gameOnObjects;
         [SerializeField] private GameObject _gameOverObjects;
         [SerializeField] private TextMeshProUGUI _timer;
@@ -21,6 +25,8 @@ namespace UI
         [SerializeField] private int _titleSceneIndex = 0;
         private float _roundTimeRemaining;
         public bool GameRunning;
+        public bool GameIsOver = false;
+        public float GameOverDelay = 2f;
         
         // Start is called before the first frame update
         void Start()
@@ -42,6 +48,14 @@ namespace UI
         {
             if (!GameRunning) return;
 
+            if (GameIsOver)
+            {
+                if (InputUtility.IsButtonDown(0, _startKey) || InputUtility.IsButtonDown(1, _startKey))
+                {
+                    ReturnToTitle();
+                }
+            }
+
             _roundTimeRemaining -= Time.deltaTime;
             TimeSpan timeRemaining = TimeSpan.FromSeconds(_roundTimeRemaining);
             _timer.text = $"{timeRemaining.Minutes}:{timeRemaining.Seconds:00}";
@@ -58,6 +72,18 @@ namespace UI
             UpdateGameOverLabel();
             _gameOverObjects.SetActive(true);
             Time.timeScale = 0.0f;
+            StartCoroutine(DelayGameOver(GameOverDelay));
+        }
+
+        private IEnumerator DelayGameOver(float delay)
+        {
+            float timer = 0f;
+            while (timer < delay)
+            {
+                timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            GameIsOver = true;
         }
 
         private void UpdateGameOverLabel()
