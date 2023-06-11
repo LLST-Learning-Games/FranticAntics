@@ -116,6 +116,8 @@ namespace  AntQueen
                     Quaternion.LookRotation(movement),
                     Time.deltaTime * 40f);
             }
+            
+            _animator.SetFloat("Speed",movement.magnitude);
         }
 
         private bool CanMove()
