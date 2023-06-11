@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3103364779128338273}
   - component: {fileID: 3103364779128338274}
-  - component: {fileID: 3103364779128338272}
   m_Layer: 0
   m_Name: QueenPrefab
   m_TagString: Untagged
@@ -59,20 +58,6 @@ MonoBehaviour:
     type: 3}
   _animator: {fileID: 7604969460104979197}
   _antSpawnCooldownTime: 0.5
---- !u!114 &3103364779128338272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3103364779128338275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8daf5b84543d41bb90bc4b43f552b4f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
-  target: {x: 0, y: 0}
 --- !u!1 &3103364779540476501
 GameObject:
   m_ObjectHideFlags: 0
