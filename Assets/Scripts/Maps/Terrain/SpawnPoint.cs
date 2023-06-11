@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class SpawnPoint : MonoBehaviour
 {
     private MapObjectType type = MapObjectType.Obstacle;
+    private Vector3 initRotation;
     
     // Start is called before the first frame update
     public void Initialize(SpawnPointData initData)
@@ -18,12 +19,23 @@ public class SpawnPoint : MonoBehaviour
 
         transform.position = initData.MapPosition;
         type = initData.Type;
-
+        
+        if (initData.RotationOverride != Vector3.zero)
+        {
+            initRotation = initData.RotationOverride;
+        }
+        else
+        {
+            float newYRotation = Random.Range(0, 360);
+            initRotation = new Vector3(0, newYRotation, 0);
+        }
         SpawnVisual(initData.PrefabOverride);
     }
 
     private void SpawnVisual(GameObject prefabOverride = null)
     {
+
+        
         if (prefabOverride != null)
         {
             GameObject newVisual = Instantiate(prefabOverride);
@@ -55,6 +67,7 @@ public class SpawnPoint : MonoBehaviour
         visualObject.transform.parent = transform;
         Vector3 terrainPos = GetTerrainPos(transform.position.x, transform.position.z);
         visualObject.transform.localPosition = new Vector3(0, terrainPos.y, 0);
+        visualObject.transform.rotation = Quaternion.Euler(initRotation);
     }
     
     //Returns a position on your terrain
