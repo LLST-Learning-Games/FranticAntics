@@ -14,10 +14,6 @@ namespace UI
         [SerializeField] private GameObject _gameOnObjects;
         [SerializeField] private GameObject _gameOverObjects;
         [SerializeField] private TextMeshProUGUI _timer;
-        [SerializeField] private TextMeshProUGUI _playerOneScore;
-        [SerializeField] private TextMeshProUGUI _playerTwoScore;
-        [SerializeField] private TextMeshProUGUI _playerOneNectar;
-        [SerializeField] private TextMeshProUGUI _playerTwoNectar;
         [SerializeField] private TextMeshProUGUI _winnerLabel;
         [SerializeField] private TeamManager _teamManager;
         
@@ -46,15 +42,10 @@ namespace UI
         {
             if (!GameRunning) return;
 
-            _playerOneScore.text = $"Score: {_teamManager.TeamOne.Score}";
-            _playerTwoScore.text = $"Score: {_teamManager.TeamTwo.Score}";
-            _playerOneNectar.text = $"Nectar: {_teamManager.TeamOne.Nectar:0}";
-            _playerTwoNectar.text = $"Nectar: {_teamManager.TeamTwo.Nectar:0}";
-
             _roundTimeRemaining -= Time.deltaTime;
             TimeSpan timeRemaining = TimeSpan.FromSeconds(_roundTimeRemaining);
             _timer.text = $"{timeRemaining.Minutes}:{timeRemaining.Seconds}";
-            
+
             if (_roundTimeRemaining <= 0.0f)
             {
                 GameOver();

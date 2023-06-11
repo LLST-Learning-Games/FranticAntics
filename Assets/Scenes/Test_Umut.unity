@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17528328, g: 0.2193019, b: 0.30161384, a: 1}
+  m_IndirectSpecularColor: {r: 0.17528379, g: 0.21930264, b: 0.30161515, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   Colony: {fileID: 1570078888}
   Player: 2
   MaximumAnts: 0
-  InitialNectar: 100
+  InitialNectar: 0
   AntNectarCost: 20
   NectarGainPerSecond: 2
   InitialAnts: 6
@@ -2140,7 +2140,7 @@ MonoBehaviour:
   Colony: {fileID: 1788330365}
   Player: 1
   MaximumAnts: 0
-  InitialNectar: 100
+  InitialNectar: 0
   AntNectarCost: 20
   NectarGainPerSecond: 2
   InitialAnts: 6
@@ -2459,6 +2459,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3703832302559379988, guid: b5e9496f80b6c4747b6e3c2f800e639a,
+        type: 3}
+      propertyPath: TeamController
+      value: 
+      objectReference: {fileID: 1598020930}
+    - target: {fileID: 4104766870089359196, guid: b5e9496f80b6c4747b6e3c2f800e639a,
+        type: 3}
+      propertyPath: TeamController
+      value: 
+      objectReference: {fileID: 1659190142}
     - target: {fileID: 4596930455243269874, guid: b5e9496f80b6c4747b6e3c2f800e639a,
         type: 3}
       propertyPath: m_Name
