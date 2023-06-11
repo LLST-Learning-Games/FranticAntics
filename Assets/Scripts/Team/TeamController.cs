@@ -25,6 +25,7 @@ namespace Team
         public float InitialNectar = 100.0f;
         public float AntNectarCost = 20.0f;
         public float NectarGainPerSecond = 2.0f;
+        public float StopNectarGainAtAmount = 20.0f;
         public float InitialAnts = 6;
         public Color WorkerAntColor = Color.white;
 
@@ -39,7 +40,10 @@ namespace Team
 
         private void Update()
         {
-            Nectar += NectarGainPerSecond * Time.deltaTime;
+            if (Nectar < StopNectarGainAtAmount)
+            {
+                Nectar += NectarGainPerSecond * Time.deltaTime;
+            }
 
             if (_activePowerUps.Count != 0)
             {
