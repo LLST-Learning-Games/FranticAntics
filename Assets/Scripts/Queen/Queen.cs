@@ -55,6 +55,7 @@ namespace  AntQueen
 
         private void ResetCooldowns()
         {
+<<<<<<< HEAD
             _antSpawnCooldown = _antSpawnCooldownTime;
             _sendAntCooldown = _sendAntCooldownTime;
             _sendAntMovementPauseCooldown = -1;
@@ -63,6 +64,12 @@ namespace  AntQueen
         void Update()
         {
             UpdateCooldowns();
+            
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SpawnAnt();
+            }
+                
             HandleMovement();
             HandleTarget();
             HandleCommand();
