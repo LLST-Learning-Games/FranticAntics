@@ -145,8 +145,9 @@ namespace Worker.State
         
         private void HandleDisruptedCarry()
         {
-            if(TargetCollectable)
-                TargetCollectable.UnassignAnt(_workerAntController);
+            if (!TargetCollectable) return;
+
+            TargetCollectable.UnassignAnt(_workerAntController);
 
             if (!TargetCollectable.HasEnoughAntsToCarry())
             {
