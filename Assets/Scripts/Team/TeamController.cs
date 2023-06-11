@@ -19,6 +19,7 @@ namespace Team
         public float AntNectarCost = 20.0f;
         public float NectarGainPerSecond = 2.0f;
         public float InitialAnts = 6;
+        public Color WorkerAntColor = Color.white;
 
         [Header("Game State")]
         public float Score;
