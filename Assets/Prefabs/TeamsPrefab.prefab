@@ -218,14 +218,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30bd277165c4f358c4f817b023bf79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activePowerUps: []
   WorkerAntManager: {fileID: 1574112862701324111}
   Queen: {fileID: 1604038623218782182}
   Colony: {fileID: 0}
   Player: 2
   MaximumAnts: 0
   InitialNectar: 0
-  AntNectarCost: 20
+  AntNectarCost: 1
   NectarGainPerSecond: 2
+  StopNectarGainAtAmount: 5
   InitialAnts: 6
   WorkerAntColor: {r: 0.010946936, g: 0.13361512, b: 0.7735849, a: 1}
   Score: 0
@@ -276,14 +278,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30bd277165c4f358c4f817b023bf79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activePowerUps: []
   WorkerAntManager: {fileID: 4018812733872255072}
   Queen: {fileID: 2077546122826283065}
   Colony: {fileID: 0}
   Player: 1
   MaximumAnts: 0
   InitialNectar: 0
-  AntNectarCost: 20
+  AntNectarCost: 1
   NectarGainPerSecond: 2
+  StopNectarGainAtAmount: 5
   InitialAnts: 6
   WorkerAntColor: {r: 0.7735849, g: 0.032840855, b: 0.032840855, a: 1}
   Score: 0
@@ -303,7 +307,7 @@ PrefabInstance:
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.24
+      value: -22.27
       objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
@@ -313,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.39
+      value: -23.62
       objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
@@ -405,7 +409,7 @@ PrefabInstance:
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.192497
+      value: 10.9
       objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
@@ -415,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3815422
+      value: -24.7
       objectReference: {fileID: 0}
     - target: {fileID: 3103364779128338273, guid: b9e646c5d2fb348739efd06265c59e9a,
         type: 3}
