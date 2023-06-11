@@ -51,15 +51,16 @@ namespace  AntQueen
         {
             HandleMovement();
             HandleTarget();
+            HandleCommand();
             HandleSpawnAnt();
         }
-
+        
         private void HandleMovement()
         {
             //Debug.LogWarning($"platform: {Application.platform}");
             
             
-            var leftInput = GetController("Left", _playerNumber);
+            var leftInput = GetStickInput("Left", _playerNumber);
             
             
             // Debug.LogWarning($"leftInput: {leftInput}");
@@ -78,7 +79,7 @@ namespace  AntQueen
 
         private void HandleTarget()
         {
-            var rightInput = GetController("Right", _playerNumber);
+            var rightInput = GetStickInput("Right", _playerNumber);
             
             // Debug.LogWarning($"rightInput: {rightInput}");
             
@@ -86,6 +87,26 @@ namespace  AntQueen
             _targetObject.transform.SetLocalPositionAndRotation(target * _targetDistance, Quaternion.identity);
         }
 
+        private void HandleCommand()
+        {
+
+            var aInputString = GetButtonInputName("A", _playerNumber);
+            var bInputString = GetButtonInputName("B", _playerNumber);
+
+            if(Input.GetButtonDown(aInputString))
+            {
+                Debug.LogWarning("A button calling");
+                
+                TeamController.WorkerAntManager.SendForSearch();
+            }
+
+            else if(Input.GetButtonDown(bInputString))
+            {
+                Debug.LogWarning("B button calling");
+                
+                TeamController.WorkerAntManager.Whistle();
+            }
+        }
 
         public void HandleSpawnAnt()
         {
@@ -121,7 +142,7 @@ namespace  AntQueen
             newAnt.Initialize();
         }
 
-        private Vector2 GetController(string stick, int controller)
+        private Vector2 GetStickInput(string stick, int controller)
         {
             // Debug.LogWarning($"{_inputPlatformMode.ToString()}");
             // Debug.LogWarning($"{_inputPlatformMode}");
@@ -134,6 +155,15 @@ namespace  AntQueen
                 Input.GetAxis($"Vertical-{stick}-{controller}-{_inputPlatformMode}")
             );
         }
+
+
+        private string GetButtonInputName(string button, int controller)
+        {
+            // Debug.LogWarning($"trying {button}-{controller}-{_inputPlatformMode}");
+            //
+            return $"{button}-{controller}-{_inputPlatformMode}";
+        }
+        
 
         private float GetTrigger(int controller)
         {
