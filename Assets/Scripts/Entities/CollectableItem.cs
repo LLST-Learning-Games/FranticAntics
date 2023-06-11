@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities
 {
@@ -8,5 +9,7 @@ namespace Entities
         public bool ForQueen;
 
         public float SpeedMultiplier = 1f;
+
+        [FormerlySerializedAs("Collected")] public bool ItemCollected;
     }
 }

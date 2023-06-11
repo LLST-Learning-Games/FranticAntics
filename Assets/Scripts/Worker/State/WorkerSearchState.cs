@@ -1,4 +1,6 @@
+using System;
 using DG.Tweening;
+using Entities;
 using UnityEngine;
 
 namespace Worker.State
@@ -45,6 +47,18 @@ namespace Worker.State
             {
                 _workerAntController.Whistle(Vector3.zero);
             });
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!_isActive)
+                return;
+            
+            if(!other.transform.CompareTag("collectable"))
+                return;
+            
+            _workerAntController.ChangeState(WorkerAntStatus.CollectFood);
+            (_workerAntController.GetCurrentStateController() as WorkerCollectState).SetTarget(other.GetComponent<CollectableItem>());
         }
     }
 }
