@@ -966,7 +966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamController: {fileID: 1598020930}
   _defenceAnts: []
-  _lineRange: 0.65
+  _lineRange: 0.7
 --- !u!114 &530418289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamController: {fileID: 1659190142}
   _defenceAnts: []
-  _lineRange: 0.65
+  _lineRange: 0.7
 --- !u!224 &1252209784 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7546036127966213791, guid: b5e9496f80b6c4747b6e3c2f800e639a,

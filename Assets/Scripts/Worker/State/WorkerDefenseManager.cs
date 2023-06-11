@@ -64,7 +64,7 @@ namespace Worker.State
                     if(antController.GetCurrentStateController() is not WorkerDefenceState defenceState)
                         continue;
                 
-                    defenceState.DefencePositionOffset = tempObject.transform.forward.normalized * (line + _lineRange);
+                    defenceState.DefencePositionOffset = tempObject.transform.forward.normalized * ((line + 1) * _lineRange);
                     tempObject.transform.eulerAngles += new Vector3(0, angle, 0);
                 
                     antIndex++;
