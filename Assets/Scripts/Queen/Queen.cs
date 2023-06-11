@@ -159,7 +159,7 @@ namespace  AntQueen
 
         private string GetButtonInputName(string button, int controller)
         {
-            // Debug.LogWarning($"trying {button}-{controller}-{_inputPlatformMode}");
+            Debug.LogWarning($"trying {button}-{controller}-{_inputPlatformMode}");
             //
             return $"{button}-{controller}-{_inputPlatformMode}";
         }

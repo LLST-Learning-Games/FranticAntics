@@ -164,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
@@ -304,6 +304,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dorito (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450313214207954573, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261319372830280450, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: Points
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c88a8f9c04313408b26b008527dce2, type: 3}
@@ -392,10 +402,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2213592341385552872, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
+        type: 3}
+      propertyPath: Points
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
@@ -804,7 +819,7 @@ Transform:
   - {fileID: 1659190141}
   - {fileID: 1598020929}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &416446201
 MonoBehaviour:
@@ -830,7 +845,7 @@ PrefabInstance:
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
@@ -886,6 +901,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dorito
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450313214207954573, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690620848138651873, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261319372830280450, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: Points
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c88a8f9c04313408b26b008527dce2, type: 3}
@@ -960,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -1044,7 +1074,7 @@ PrefabInstance:
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
@@ -1100,6 +1130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dorito (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261319372830280450, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: Points
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c88a8f9c04313408b26b008527dce2, type: 3}
@@ -1247,7 +1282,7 @@ PrefabInstance:
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1487943974918211268, guid: 6a8ccedb63fc3194c843cbc3364ad2de,
         type: 3}
@@ -1331,7 +1366,7 @@ PrefabInstance:
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
@@ -1387,6 +1422,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dorito (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450313214207954573, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261319372830280450, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: Points
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c88a8f9c04313408b26b008527dce2, type: 3}
@@ -1548,10 +1593,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2213592341385552872, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
+        type: 3}
+      propertyPath: Points
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1423502361751319248, guid: 89ad2ab36c802fc4c94a106c7ef2acb4,
         type: 3}
@@ -1788,7 +1838,7 @@ PrefabInstance:
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3929778693947774007, guid: 42c88a8f9c04313408b26b008527dce2,
         type: 3}
@@ -1844,6 +1894,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dorito (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261319372830280450, guid: 42c88a8f9c04313408b26b008527dce2,
+        type: 3}
+      propertyPath: Points
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c88a8f9c04313408b26b008527dce2, type: 3}
@@ -2527,7 +2582,7 @@ PrefabInstance:
     - target: {fileID: 8282097875549111199, guid: b5e9496f80b6c4747b6e3c2f800e639a,
         type: 3}
       propertyPath: _roundTimeLimit
-      value: 300
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 9093863756179572046, guid: b5e9496f80b6c4747b6e3c2f800e639a,
         type: 3}
