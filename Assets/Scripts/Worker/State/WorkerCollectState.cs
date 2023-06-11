@@ -63,13 +63,15 @@ namespace Worker.State
                 if(TargetCollectable.ItemCollected && !_itemCollected)
                     _workerAntController.Whistle(Vector3.zero);
 
-                if (!_itemCollected && Vector3.Distance(TargetCollectable.transform.position, transform.position) < .5f)
+                if (!_itemCollected 
+                    && Vector3.Distance(TargetCollectable.transform.position, transform.position) < TargetCollectable.AssignmentWaitDistance)
                 {
                     if(!_waitingForEnoughToCollect)
                         TargetCollectable.AssignAnt(_workerAntController);
 
                     if (!TargetCollectable.HasEnoughAntsToCarry())
                     {
+                        // Set strain animation and sweat effects
                         _waitingForEnoughToCollect = true;
                         return;
                     }

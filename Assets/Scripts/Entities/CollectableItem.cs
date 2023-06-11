@@ -15,6 +15,7 @@ namespace Entities
         public bool Mineable;
         public int MinAssignedAntsForPickup = 1;
         public List<WorkerAntController> AntsAssigned;
+        public float AssignmentWaitDistance = 1f;
 
         [Header("Modifiers")]
         public float SpeedMultiplier = 1f;
