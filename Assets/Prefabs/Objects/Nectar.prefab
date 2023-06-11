@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForQueen: 1
   Mineable: 0
+  MinAssignedAntsForPickup: 1
+  AntsAssigned: []
+  AssignmentWaitDistance: 1
   SpeedMultiplier: 1
   SizeFromResourcesRemaining:
     serializedVersion: 2
@@ -108,8 +111,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Resource: 1
-  TotalResources: 50
-  ResourcesPerPickup: 50
+  TotalResources: 5
+  ResourcesPerPickup: 5
   _minedPiecePrefab: {fileID: 0}
   ResourcesRemaining: 0
   ItemCollected: 0
