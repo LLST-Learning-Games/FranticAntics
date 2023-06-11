@@ -9,6 +9,7 @@ public class SpawnPointData : ScriptableObject
 {
     public Vector3 MapPosition;
     public MapObjectType Type;
+    public int PlayerIndex;
     public GameObject PrefabOverride;
     public Vector3 RotationOverride;
 }

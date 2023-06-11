@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class SpawnPoint : MonoBehaviour
 {
     private MapObjectType type = MapObjectType.Obstacle;
+    private int playerIndex;
     private Vector3 initRotation;
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class SpawnPoint : MonoBehaviour
 
         transform.position = initData.MapPosition;
         type = initData.Type;
+        playerIndex = initData.PlayerIndex;
         
         if (initData.RotationOverride != Vector3.zero)
         {
@@ -34,13 +36,10 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnVisual(GameObject prefabOverride = null)
     {
-
-        
         if (prefabOverride != null)
         {
             GameObject newVisual = Instantiate(prefabOverride);
             SetVisualPosition(newVisual);
-            return;
         }
         
         switch (type)
@@ -49,6 +48,7 @@ public class SpawnPoint : MonoBehaviour
                 SpawnObstacle();
                 break;
             case MapObjectType.PlayerStartLocation:
+                SpawnPointManager.Instance.TryAssignToPlayer(playerIndex, GetTerrainPos(transform.position.x, transform.position.z));
                 break;
             case MapObjectType.Resource:
                 break;
@@ -84,11 +84,5 @@ public class SpawnPoint : MonoBehaviour
  
         Debug.Log("Terrain location found at " + hit.point);
         return hit.point;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -7,6 +7,12 @@ public class SpawnPointManager : MonoBehaviour
     public LevelSpawnData LevelSpawnData;
     public List<SpawnPoint> ActiveSpawnPoints;
     public SpawnPoint SpawnPrefab;
+
+    public GameObject Player1Queen;
+    public GameObject Player2Queen;
+    
+    private bool player1Assigned;
+    private bool player2Assigned;
     
     #region SINGLETON
     public static SpawnPointManager Instance;
@@ -31,9 +37,18 @@ public class SpawnPointManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TryAssignToPlayer(int playerIndex, Vector3 startPosition)
     {
-        
+        if (playerIndex == 1 && !player1Assigned)
+        {
+            Player1Queen.transform.position = startPosition;
+            player1Assigned = true;
+        }
+
+        if (playerIndex == 2 && !player2Assigned)
+        {
+            Player2Queen.transform.position = startPosition;
+            player2Assigned = true;
+        }
     }
 }
