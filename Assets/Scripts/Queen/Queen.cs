@@ -9,21 +9,26 @@ namespace  AntQueen
     {
         public TeamController TeamController;
         
+        [Header("Team and Player Setup")]
         [SerializeField] private int _playerNumber;
         [SerializeField] private Transform _targetObject;
         [SerializeField] private Transform _playerModel;
         [SerializeField] private float _targetDistance = 1f;
-        [SerializeField] private float _speed = 2f;
         [SerializeField] private float _spawnTriggerThreshold = 0.5f;
-
         [SerializeField] private WorkerAntController _antPrefab;
-
         [SerializeField] private Animator _animator;
+        
+        
+        [Header("Tunables")]
+        [SerializeField] private float _speed = 2f;
+        [SerializeField] private float _antSpawnStartDelayTime = 0.2f;
         [SerializeField] private float _antSpawnCooldownTime = 0.5f;
         [SerializeField] private float _sendAntMovementPauseCooldownTime = 0.5f;
         [SerializeField] private float _sendAntCooldownTime = 0.2f;
-        
 
+
+        private bool _antSpawnButtonDown = false;
+        private float _antSpawnStartDelay;
         private float _antSpawnCooldown;
         private float _sendAntMovementPauseCooldown;
         private float _sendAntCooldown;
@@ -58,6 +63,7 @@ namespace  AntQueen
             _antSpawnCooldown = _antSpawnCooldownTime;
             _sendAntCooldown = _sendAntCooldownTime;
             _sendAntMovementPauseCooldown = -1;
+            _antSpawnStartDelay = -1;
         }
 
         void Update()
@@ -73,6 +79,7 @@ namespace  AntQueen
         {
             var time = Time.deltaTime;
             _antSpawnCooldown -= time;
+            _antSpawnStartDelay -= time;
             _sendAntCooldown -= time;
             _sendAntMovementPauseCooldown -= time;
         }
@@ -84,6 +91,7 @@ namespace  AntQueen
             
             if(CanMove())
             {
+                _animator.SetBool("IsCommanding",false);
                 transform.Translate(movement * Time.deltaTime * _speed);
                 _animator.speed = movement.magnitude * _speed;
             }
@@ -121,19 +129,18 @@ namespace  AntQueen
 
         private void HandleCommand()
         {
-
             var aInputString = GetButtonInputName("A", _playerNumber);
             var bInputString = GetButtonInputName("B", _playerNumber);
 
             if(Input.GetButtonDown(aInputString) || Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.LogWarning("A button calling");
+                //Debug.LogWarning("A button calling");
                 SendWorkerAntForSearch();
             }
 
             else if(Input.GetButtonDown(bInputString))
             {
-                Debug.LogWarning("B button calling");
+                //Debug.LogWarning("B button calling");
                 TeamController.WorkerAntManager.Whistle();
             }
         }
@@ -142,29 +149,37 @@ namespace  AntQueen
         {
             if (_sendAntCooldown < 0)
             {
+                _animator.SetBool("IsCommanding",true);
+                
                 TeamController.WorkerAntManager.SendForSearch();
                 _sendAntCooldown = _sendAntCooldownTime;
                 _sendAntMovementPauseCooldown = _sendAntMovementPauseCooldownTime;
-                Debug.Log($"Sending Ant");
-            }
-            else
-            {
-                Debug.Log($"Send Ant Cooling down for {_sendAntCooldown}");
             }
         }
 
         public void HandleSpawnAnt()
         {
+            if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
+            {
+                _antSpawnStartDelay = 0;
+                _antSpawnButtonDown = false;
+                return;
+            }
+
+            if (!_antSpawnButtonDown)
+            {
+                // todo: cue straining animation
+                Debug.Log("Start straining now");
+                _antSpawnStartDelay = _antSpawnStartDelayTime;
+            }
+            
+            _antSpawnButtonDown = true;
+
             if (!CanSpawnAnt())
             {
                 return;
             }
-
-            if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
-            {
-                return;
-            }
-
+            
             SpawnAnt();
             _antSpawnCooldown = _antSpawnCooldownTime;
             TeamController.Nectar -= TeamController.AntNectarCost;
@@ -172,6 +187,9 @@ namespace  AntQueen
 
         private bool CanSpawnAnt()
         {
+            if (_antSpawnStartDelay > 0)
+                return false;
+            
             if (_antSpawnCooldown > 0)
                 return false;
 
@@ -180,6 +198,8 @@ namespace  AntQueen
 
         private void SpawnAnt()
         {
+            // todo: cue ant laying animation
+            Debug.Log($"Laying ant now!");
             var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
             newAnt.TeamController = TeamController;
             newAnt.Initialize();
@@ -187,12 +207,6 @@ namespace  AntQueen
 
         private Vector2 GetStickInput(string stick, int controller)
         {
-            // Debug.LogWarning($"{_inputPlatformMode.ToString()}");
-            // Debug.LogWarning($"{_inputPlatformMode}");
-            //
-            // Debug.LogWarning($"Horizontal-{stick}-{controller}, Vertical-{stick}-{controller}");
-            //
-            
             return new Vector2(
                 Input.GetAxis($"Horizontal-{stick}-{controller}-{_inputPlatformMode}"),
                 Input.GetAxis($"Vertical-{stick}-{controller}-{_inputPlatformMode}")
@@ -202,8 +216,7 @@ namespace  AntQueen
 
         private string GetButtonInputName(string button, int controller)
         {
-            Debug.LogWarning($"trying {button}-{controller}-{_inputPlatformMode}");
-            //
+            //Debug.LogWarning($"trying {button}-{controller}-{_inputPlatformMode}");
             return $"{button}-{controller}-{_inputPlatformMode}";
         }
         
