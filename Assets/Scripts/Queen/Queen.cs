@@ -17,8 +17,12 @@ namespace  AntQueen
         [SerializeField] private float _spawnTriggerThreshold = 0.5f;
         [SerializeField] private WorkerAntController _antPrefab;
         [SerializeField] private Animator _animator;
-        
-        
+
+        [Header("Controls")]
+        [SerializeField] private ControllerButtonDirection _sendKey = ControllerButtonDirection.South;
+        [SerializeField] private ControllerButtonDirection _recallKey = ControllerButtonDirection.East;
+        [SerializeField] private ControllerButtonDirection _spawnKey = ControllerButtonDirection.West;
+
         [Header("Tunables")]
         [SerializeField] private float _speed = 2f;
         [SerializeField] private float _antSpawnStartDelayTime = 0.2f;
@@ -129,16 +133,13 @@ namespace  AntQueen
 
         private void HandleCommand()
         {
-            var aInputString = GetButtonInputName("A", _playerNumber);
-            var bInputString = GetButtonInputName("B", _playerNumber);
-
-            if(Input.GetButtonDown(aInputString) || Input.GetKeyDown(KeyCode.Space))
+            if(InputUtility.IsButtonDown(_playerNumber, _sendKey) || Input.GetKeyDown(KeyCode.Space))
             {
                 //Debug.LogWarning("A button calling");
                 SendWorkerAntForSearch();
             }
 
-            else if(Input.GetButtonDown(bInputString))
+            else if(InputUtility.IsButtonDown(_playerNumber, _recallKey))
             {
                 //Debug.LogWarning("B button calling");
                 TeamController.WorkerAntManager.Whistle();
@@ -159,7 +160,8 @@ namespace  AntQueen
 
         public void HandleSpawnAnt()
         {
-            if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
+            //if (GetTrigger(_playerNumber) < _spawnTriggerThreshold)
+            if (InputUtility.IsButtonDown(_playerNumber, _spawnKey))
             {
                 _antSpawnStartDelay = 0;
                 _antSpawnButtonDown = false;
