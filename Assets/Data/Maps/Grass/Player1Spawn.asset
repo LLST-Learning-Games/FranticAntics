@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapPosition: {x: 10, y: 0, z: 50}
   Type: 0
+  PlayerIndex: 1
   PrefabOverride: {fileID: 6401159979199908741, guid: c29bdeb5fc5c9b8438c67d69af5f0f99,
     type: 3}
   RotationOverride: {x: 0, y: 0, z: 0}
