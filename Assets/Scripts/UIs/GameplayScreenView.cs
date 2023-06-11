@@ -16,6 +16,8 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _timer;
         [SerializeField] private TextMeshProUGUI _playerOneScore;
         [SerializeField] private TextMeshProUGUI _playerTwoScore;
+        [SerializeField] private TextMeshProUGUI _playerOneNectar;
+        [SerializeField] private TextMeshProUGUI _playerTwoNectar;
         [SerializeField] private TextMeshProUGUI _winnerLabel;
         [SerializeField] private TeamManager _teamManager;
         
@@ -43,10 +45,12 @@ namespace UI
         void Update()
         {
             if (!GameRunning) return;
-            
+
             _playerOneScore.text = _teamManager.TeamOne.Score.ToString();
             _playerTwoScore.text = _teamManager.TeamTwo.Score.ToString();
-            
+            _playerOneNectar.text = _teamManager.TeamOne.Nectar.ToString();
+            _playerTwoNectar.text = _teamManager.TeamTwo.Nectar.ToString();
+
             _roundTimeRemaining -= Time.deltaTime;
             _timer.text = $"{_roundTimeRemaining:0}";
             if (_roundTimeRemaining <= 0.0f)
