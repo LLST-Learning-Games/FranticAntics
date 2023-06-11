@@ -14,13 +14,13 @@ namespace Worker.State
 
         private Tween _waitingDelayTween;
         private Vector3 _searchPosition;
-        
+
         public override void Activate()
         {
             base.Activate();
 
             _workerAntController.Status = WorkerAntStatus.SearchFood;
-            
+
             var queen = _workerAntController.TeamController.Queen;
             _searchPosition = queen.transform.position + queen.GetForward().normalized * _searchDistance;
             _workerAntController.SetDestination(_searchPosition);
@@ -29,14 +29,14 @@ namespace Worker.State
         public override void Deactivate()
         {
             base.Deactivate();
-            
+
             _waitingDelayTween?.Kill();
         }
 
         protected override void UpdateState()
         {
             base.UpdateState();
-            
+
             if(Vector3.Distance(_searchPosition, transform.position) <= 1)
                 OnPathCompleted();
         }
@@ -53,7 +53,7 @@ namespace Worker.State
         {
             if(!_isActive)
                 return;
-            
+
             if(!other.transform.CompareTag("collectable"))
                 return;
 
@@ -62,7 +62,7 @@ namespace Worker.State
             if (collectableItem == null)
                 return;
 
-            if (collectableItem.ResourcesRemaining <= 0)
+            if (collectableItem.ResourcesRemaining <= 0 || collectableItem.ItemCollected)
                 return;
 
             _workerAntController.ChangeState(WorkerAntStatus.CollectFood);

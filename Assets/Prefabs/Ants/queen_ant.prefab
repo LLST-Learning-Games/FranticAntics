@@ -555,7 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5295049150727560550}
   - component: {fileID: 5688453530548094316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: queen_ant
   m_TagString: Untagged
   m_Icon: {fileID: 0}

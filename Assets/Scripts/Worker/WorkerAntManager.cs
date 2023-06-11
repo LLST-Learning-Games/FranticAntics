@@ -11,8 +11,8 @@ namespace Worker
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-                SendForSearch();
+            // if(Input.GetKeyDown(KeyCode.Space))
+            //     SendForSearch();
             
             if(Input.GetKeyDown(KeyCode.D))
                 Whistle();
