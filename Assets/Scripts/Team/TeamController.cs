@@ -8,6 +8,8 @@ namespace Team
     {
         public WorkerAntManager WorkerAntManager;
         public Queen Queen;
+        public Colony Colony;
+        public Player Player;
 
         [Header("Settings")]
         public int MaximumAnts;
