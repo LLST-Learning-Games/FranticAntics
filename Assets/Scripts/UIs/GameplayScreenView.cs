@@ -44,7 +44,7 @@ namespace UI
 
             _roundTimeRemaining -= Time.deltaTime;
             TimeSpan timeRemaining = TimeSpan.FromSeconds(_roundTimeRemaining);
-            _timer.text = $"{timeRemaining.Minutes}:{timeRemaining.Seconds}";
+            _timer.text = $"{timeRemaining.Minutes}:{timeRemaining.Seconds:00}";
 
             if (_roundTimeRemaining <= 0.0f)
             {

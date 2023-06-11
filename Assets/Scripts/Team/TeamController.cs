@@ -1,4 +1,5 @@
 using AntQueen;
+using System.Collections.Generic;
 using UnityEngine;
 using Worker;
 
@@ -10,6 +11,7 @@ namespace Team
         public Queen Queen;
         public Colony Colony;
         public Player Player;
+        public HashSet<WorkerAntController> workers = new HashSet<WorkerAntController>();
 
         [Header("Settings")]
         public int MaximumAnts;

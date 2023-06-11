@@ -183,6 +183,7 @@ namespace  AntQueen
             var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
             newAnt.TeamController = TeamController;
             newAnt.Initialize();
+            TeamController.workers.Add(newAnt);
         }
 
         private Vector2 GetStickInput(string stick, int controller)
