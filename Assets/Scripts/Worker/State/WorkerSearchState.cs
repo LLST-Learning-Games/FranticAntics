@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Entities;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Worker.State
 {
@@ -15,12 +16,15 @@ namespace Worker.State
         private Tween _waitingDelayTween;
         private Vector3 _searchPosition;
 
+        private NavMeshAgent _navMeshAgent;
+        
         public override void Activate()
         {
             base.Activate();
 
             _workerAntController.Status = WorkerAntStatus.SearchFood;
-
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            
             var queen = _workerAntController.TeamController.Queen;
             _searchPosition = queen.transform.position + queen.GetForward().normalized * _searchDistance;
             _workerAntController.SetDestination(_searchPosition);
@@ -31,14 +35,20 @@ namespace Worker.State
             base.Deactivate();
 
             _waitingDelayTween?.Kill();
+            _waitingDelayTween = null;
         }
 
         protected override void UpdateState()
         {
             base.UpdateState();
 
-            if(Vector3.Distance(_searchPosition, transform.position) <= 1)
+            if(_waitingDelayTween == null && Vector3.Distance(_searchPosition, transform.position) <= 1)
                 OnPathCompleted();
+            
+            if(_waitingDelayTween == null && !_navMeshAgent.hasPath)
+            {
+                _waitingDelayTween = DOVirtual.DelayedCall(3, OnPathCompleted);
+            }
         }
 
         private void OnPathCompleted()
