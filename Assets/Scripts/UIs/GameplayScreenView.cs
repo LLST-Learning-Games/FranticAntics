@@ -46,13 +46,15 @@ namespace UI
         {
             if (!GameRunning) return;
 
-            _playerOneScore.text = _teamManager.TeamOne.Score.ToString();
-            _playerTwoScore.text = _teamManager.TeamTwo.Score.ToString();
-            _playerOneNectar.text = _teamManager.TeamOne.Nectar.ToString();
-            _playerTwoNectar.text = _teamManager.TeamTwo.Nectar.ToString();
+            _playerOneScore.text = $"Score: {_teamManager.TeamOne.Score}";
+            _playerTwoScore.text = $"Score: {_teamManager.TeamTwo.Score}";
+            _playerOneNectar.text = $"Nectar: {_teamManager.TeamOne.Nectar:0}";
+            _playerTwoNectar.text = $"Nectar: {_teamManager.TeamTwo.Nectar:0}";
 
             _roundTimeRemaining -= Time.deltaTime;
-            _timer.text = $"{_roundTimeRemaining:0}";
+            TimeSpan timeRemaining = TimeSpan.FromSeconds(_roundTimeRemaining);
+            _timer.text = $"{timeRemaining.Minutes}:{timeRemaining.Seconds}";
+            
             if (_roundTimeRemaining <= 0.0f)
             {
                 GameOver();
