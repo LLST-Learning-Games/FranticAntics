@@ -98,10 +98,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForQueen: 0
-  SpeedMultiplier: 1
   Mineable: 1
+  SpeedMultiplier: 1
+  SizeFromResourcesRemaining:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.003063202
+      value: 0.4074707
+      inSlope: 0.5907198
+      outSlope: 0.5907198
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.5907198
+      outSlope: 0.5907198
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Resource: 0
+  TotalResources: 1000
+  ResourcesPerPickup: 100
   _minedPiecePrefab: {fileID: 269119627994671035, guid: adba297067d34644ea76e6abd606546c,
     type: 3}
+  ResourcesRemaining: 0
   ItemCollected: 0
 --- !u!65 &8181983213409042293
 BoxCollider:

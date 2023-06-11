@@ -47,9 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForQueen: 0
+  Mineable: 0
   SpeedMultiplier: 1
-  Points: 100
-  Nectar: 0
+  SizeFromResourcesRemaining:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Resource: 0
+  TotalResources: 100
+  ResourcesPerPickup: 100
+  _minedPiecePrefab: {fileID: 0}
+  ResourcesRemaining: 0
   ItemCollected: 0
 --- !u!135 &7772308942364486873
 SphereCollider:

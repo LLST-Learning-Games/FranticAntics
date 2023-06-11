@@ -56,9 +56,17 @@ namespace Worker.State
             
             if(!other.transform.CompareTag("collectable"))
                 return;
-            
+
+            CollectableItem collectableItem = other.GetComponent<CollectableItem>();
+
+            if (collectableItem == null)
+                return;
+
+            if (collectableItem.ResourcesRemaining <= 0)
+                return;
+
             _workerAntController.ChangeState(WorkerAntStatus.CollectFood);
-            (_workerAntController.GetCurrentStateController() as WorkerCollectState).SetTarget(other.GetComponent<CollectableItem>());
+            (_workerAntController.GetCurrentStateController() as WorkerCollectState).SetTarget(collectableItem);
         }
     }
 }

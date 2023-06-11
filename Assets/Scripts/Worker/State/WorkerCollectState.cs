@@ -15,6 +15,7 @@ namespace Worker.State
         private Transform _endDestination;
         
         private bool _itemCollected;
+        private float _resourcesCollected;
         
         public override void Activate()
         {
@@ -60,6 +61,7 @@ namespace Worker.State
                 if (!_itemCollected && Vector3.Distance(TargetCollectable.transform.position, transform.position) < .5f)
                 {
                     _itemCollected = true;
+                    _resourcesCollected = TargetCollectable.GetResources();
                 
                     if(!TargetCollectable.Mineable)
                         _collectedPiece = TargetCollectable.gameObject;
@@ -82,7 +84,7 @@ namespace Worker.State
                         _collectedPiece.transform.SetParent(null);
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
-                        TargetCollectable.Consume(_workerAntController.TeamController);
+                        TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
 
                         _workerAntController.Whistle(Vector3.zero);
                     }
