@@ -26,7 +26,10 @@ namespace UI
         {
             if (InputUtility.IsButtonDown(0, _startKey) || InputUtility.IsButtonDown(1, _startKey))
             {
-                OnTwoPlayerGameStartsClicked();
+                if(_uiState == UIState.Intro)
+                    OnStartButtonClicked();
+                else
+                    OnTwoPlayerGameStartsClicked();
             }
             else if (InputUtility.IsButtonDown(0, _creditsKey) || InputUtility.IsButtonDown(1, _creditsKey))
             {
