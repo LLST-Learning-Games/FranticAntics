@@ -10,20 +10,17 @@ namespace Worker
         public WorkerDefenseManager DefenseManager;
         [SerializeField] private List<WorkerAntController> _allWorkerAnts;
 
-        private void Update()
-        {
-            // if(Input.GetKeyDown(KeyCode.Space))
-            //     SendForSearch();
-            
-            if(Input.GetKeyDown(KeyCode.D))
-                Whistle();
-        }
-
-        public void Whistle()
+        public void Whistle(float whistleRange, Vector3 queenWorldPosition)
         {
             foreach (var workerAntController in _allWorkerAnts)
             {
                 if(workerAntController.Status == WorkerAntStatus.CollectFood || workerAntController.Status == WorkerAntStatus.Attack)
+                    continue;
+
+                Vector3 workerWorldPosition = workerAntController.transform.position;
+                float distance = Vector3.Distance(workerWorldPosition, queenWorldPosition);
+
+                if (distance > whistleRange)
                     continue;
                 
                 workerAntController.Whistle(Vector3.zero);

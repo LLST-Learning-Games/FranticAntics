@@ -1,3 +1,4 @@
+using PowerUps;
 using UnityEngine;
 
 namespace Worker.State
@@ -7,15 +8,19 @@ namespace Worker.State
         private WorkerAntMovement _movement;
 
         private WorkerAntController _enemy;
-
-        [SerializeField] private float _attackDuration = 0.5f;
+        
         private float _attackTimer;
+        private int _attackPower;
         
         public override void Initialize(WorkerAntController workerAntController)
         {
             base.Initialize(workerAntController);
 
             _movement = _workerAntController.Movement;
+            _attackPower = _workerAntController.Statistics.AttackPower;
+
+            _workerAntController.TeamController.OnPowerUpStarted += OnPowerUpStarted;
+            _workerAntController.TeamController.OnPowerUpStarted += OnPowerUpFinished;
         }
 
         public override void Activate()
@@ -63,10 +68,22 @@ namespace Worker.State
             if(_attackTimer > 0)
                 return;
 
-            _attackTimer = _attackDuration;
+            _attackTimer = 2f;
             
             _movement.Animator.SetTrigger("attack_" + Random.Range(0,2));
-            _enemy.TakeDamage(1, false);
+            _enemy.TakeDamage(_attackPower, false);
+        }
+        
+        private void OnPowerUpStarted(PowerUpData powerUpData)
+        {
+            if (powerUpData.PowerUpType == PowerUpType.SPEED)
+                _attackPower *= powerUpData.PowerUpMultiplier;
+        }
+        
+        private void OnPowerUpFinished(PowerUpData powerUpData)
+        {
+            if (powerUpData.PowerUpType == PowerUpType.SPEED)
+                _attackPower /= powerUpData.PowerUpMultiplier;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Worker
         public TeamController TeamController;
 
         public WorkerAntMovement Movement => _antMovement;
+        public WorkerAntStatistics Statistics => _antStatistics;
         
         [SerializeField] private SkinnedMeshRenderer _meshRenderer;
         [SerializeField] protected WorkerAntMovement _antMovement;
