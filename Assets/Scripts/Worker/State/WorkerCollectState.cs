@@ -47,7 +47,7 @@ namespace Worker.State
         
         protected override void UpdateState()
         {
-            if(TargetCollectable == null)
+            if(!TargetCollectable)
                 return;
             
             base.UpdateState();
