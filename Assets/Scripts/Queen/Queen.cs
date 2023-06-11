@@ -15,7 +15,7 @@ namespace  AntQueen
         [SerializeField] private Transform _playerModel;
         [SerializeField] private float _targetDistance = 1f;
         [SerializeField] private float _spawnTriggerThreshold = 0.5f;
-        [SerializeField] private WorkerAntController _antPrefab;
+        [SerializeField] private Egg _eggPrefab;
         [SerializeField] private Animator _animator;
         [SerializeField] private float _whistleRange;
 
@@ -52,7 +52,7 @@ namespace  AntQueen
 
             for(int i = 0; i < TeamController.InitialAnts; ++i)
             {
-                SpawnAnt();
+                SpawnAntEgg();
             }
             
             if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
@@ -116,6 +116,8 @@ namespace  AntQueen
                     Quaternion.LookRotation(movement),
                     Time.deltaTime * 40f);
             }
+            
+            _animator.SetFloat("Speed",movement.magnitude);
         }
 
         private bool CanMove()
@@ -198,7 +200,7 @@ namespace  AntQueen
             if (_antSpawnStartDelay > 0)
                 return;
             
-            SpawnAnt();
+            SpawnAntEgg();
             _antSpawnStartDelay = _antSpawnStartDelayTime;
             _antSpawnCooldown = _antSpawnCooldownTime;
             TeamController.Nectar -= TeamController.AntNectarCost;
@@ -209,14 +211,12 @@ namespace  AntQueen
             return TeamController.Nectar >= TeamController.AntNectarCost;
         }
 
-        private void SpawnAnt()
+        private void SpawnAntEgg()
         {
-            // todo: cue ant laying animation
             Debug.Log($"Laying ant now!");
-            var newAnt = Instantiate(_antPrefab, _targetObject.transform.position, Quaternion.identity);
-            newAnt.TeamController = TeamController;
-            newAnt.Initialize();
-            TeamController.workers.Add(newAnt);
+            
+            var newEgg = Instantiate(_eggPrefab, transform.position, Quaternion.identity);
+            newEgg.Initialize(transform.TransformPoint(transform.TransformDirection(Vector3.back)), TeamController);
         }
 
         private Vector2 GetStickInput(string stick, int controller)
