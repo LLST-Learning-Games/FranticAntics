@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 895237476186776909}
   - component: {fileID: 4306389196931984104}
   - component: {fileID: 2028776392868830754}
-  - component: {fileID: -3070257685404053423}
   - component: {fileID: 710568162528409499}
+  - component: {fileID: 186186555931555387}
   m_Layer: 6
   m_Name: rockCandy
   m_TagString: collectable
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3070257685404053423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515474215320338423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02457fd72cfd424f9e6fd2afc3fea953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForQueen: 0
-  SpeedMultiplier: 1
 --- !u!135 &710568162528409499
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -112,3 +98,35 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.54721
   m_Center: {x: 0, y: 0.000000029802322, z: 0}
+--- !u!114 &186186555931555387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515474215320338423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447c1c33d680482da663daed868e2769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForQueen: 1
+  Mineable: 0
+  SpeedMultiplier: 1
+  SizeFromResourcesRemaining:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Resource: 0
+  TotalResources: 100
+  ResourcesPerPickup: 100
+  _minedPiecePrefab: {fileID: 0}
+  ResourcesRemaining: 0
+  ItemCollected: 0
+  PowerUpData:
+    PowerUpType: 0
+    PowerUpMultiplier: 2
+    PowerUpDuration: 10
+    _powerUpTimer: 10

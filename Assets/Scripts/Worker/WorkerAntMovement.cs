@@ -1,3 +1,4 @@
+using PowerUps;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,8 +19,13 @@ namespace Worker
         public void Initialize(WorkerAntController workerAntController)
         {
             _workerAntController = workerAntController;
+
+            _navMeshAgent.speed = _workerAntController.Statistics.MovementSpeed;
+
+            _workerAntController.TeamController.OnPowerUpStarted += OnPowerUpStarted;
+            _workerAntController.TeamController.OnPowerUpFinished += OnPowerUpFinished;
         }
-        
+
         public void ProcessAntMovement()
         {
             if(_navMeshAgent.path == null)
@@ -69,11 +75,27 @@ namespace Worker
             Debug.Log("[WorkerAntController] Ant started moving");
             PlayMovementAnimation();
         }
+        
+        private void OnPowerUpStarted(PowerUpData powerUpData)
+        {
+            if (powerUpData.PowerUpType == PowerUpType.SPEED)
+                _navMeshAgent.speed *= powerUpData.PowerUpMultiplier;
+        }
+        
+        private void OnPowerUpFinished(PowerUpData powerUpData)
+        {
+            if (powerUpData.PowerUpType == PowerUpType.SPEED)
+                _navMeshAgent.speed /= powerUpData.PowerUpMultiplier;
+        }
 
         public void Disable()
         {
             _navMeshAgent.Stop();
             _navMeshAgent.enabled = false;
+            
+            _workerAntController.TeamController.OnPowerUpStarted -= OnPowerUpStarted;
+            _workerAntController.TeamController.OnPowerUpFinished -= OnPowerUpFinished;
+            
             enabled = false;
         }
     }

@@ -1,5 +1,7 @@
+using System;
 using AntQueen;
 using System.Collections.Generic;
+using PowerUps;
 using UnityEngine;
 using Worker;
 
@@ -7,6 +9,11 @@ namespace Team
 {
     public class TeamController : MonoBehaviour
     {
+        public Action<PowerUpData> OnPowerUpStarted;
+        public Action<PowerUpData> OnPowerUpFinished;
+
+        [SerializeField] private List<PowerUpData> _activePowerUps;
+
         public WorkerAntManager WorkerAntManager;
         public Queen Queen;
         public Colony Colony;
@@ -33,6 +40,26 @@ namespace Team
         private void Update()
         {
             Nectar += NectarGainPerSecond * Time.deltaTime;
+
+            if (_activePowerUps.Count != 0)
+            {
+                foreach (var activePowerUp in _activePowerUps)
+                {
+                    activePowerUp.Update();
+                }
+            }
+        }
+
+        public void AddPowerUP(PowerUpData powerUpData)
+        {
+            _activePowerUps.Add(powerUpData);
+
+            OnPowerUpStarted?.Invoke(powerUpData);
+            
+            powerUpData.OnPowerUpFinished += data =>
+            {
+                OnPowerUpFinished?.Invoke(data);
+            };
         }
     }
 }
