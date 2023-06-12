@@ -83,7 +83,8 @@ namespace Worker.State
                     }
                         
                     _itemCollected = true;
-                    
+
+                    _workerAntController.Movement.MultiplySpeed(TargetCollectable.SpeedMultiplier);
                     if(!TargetCollectable.Mineable)
                     {
                         _collectedPiece = TargetCollectable.gameObject;

@@ -15,6 +15,8 @@ namespace Worker.State
             base.Activate();
             
             _workerAntController.Status = WorkerAntStatus.Defense;
+            
+            _workerAntController.Movement.MultiplySpeed(1);
         }
 
         protected override void UpdateState()
