@@ -120,7 +120,7 @@ namespace  AntQueen
 
         private bool CanMove()
         {
-            if (_sendAntMovementPauseCooldown > 0 || _antSpawnButtonDown)
+            if (_sendAntMovementPauseCooldown > 0 || _antSpawnButtonDown || InputUtility.IsButtonPressed(_playerNumber, _spawnKey))
             {
                 return false;
             }
@@ -214,7 +214,9 @@ namespace  AntQueen
             Debug.Log($"Laying ant now!");
             
             var newEgg = Instantiate(_eggPrefab, transform.position, Quaternion.identity);
-            newEgg.Initialize(transform.TransformPoint(transform.TransformDirection(Vector3.back)), TeamController);
+            Vector3 spawnTarget = transform.TransformPoint(Quaternion.Inverse(_playerModel.rotation) * Vector3.one);
+            spawnTarget.y = 0;
+            newEgg.Initialize(spawnTarget, TeamController);
         }
 
         private Vector2 GetStickInput(string stick, int controller)
