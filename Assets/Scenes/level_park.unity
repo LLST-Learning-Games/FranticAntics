@@ -3127,6 +3127,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2886225322838909543, guid: 6fb3f4a1f9d9e8b41aeab5a991985a07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3020676365172248986, guid: 6fb3f4a1f9d9e8b41aeab5a991985a07,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3317,6 +3322,11 @@ PrefabInstance:
       propertyPath: _teamManager
       value: 
       objectReference: {fileID: 764444114}
+    - target: {fileID: 5869102519078633175, guid: 6fb3f4a1f9d9e8b41aeab5a991985a07,
+        type: 3}
+      propertyPath: _countdownTime
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5869102519078633175, guid: 6fb3f4a1f9d9e8b41aeab5a991985a07,
         type: 3}
       propertyPath: _roundTimeLimit

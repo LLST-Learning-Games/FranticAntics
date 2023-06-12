@@ -11,6 +11,8 @@ namespace UI
 {
     public class GameplayScreenView : MonoBehaviour
     {
+        public static GameplayScreenView Instance;
+        
         [Header("Controller Buttons")]
         [SerializeField] private ControllerButtonDirection _startKey = ControllerButtonDirection.South;
 
@@ -25,8 +27,11 @@ namespace UI
         [SerializeField] private TeamManager _teamManager;
         
         [SerializeField] private float _roundTimeLimit;
+        [SerializeField] private float _countdownTime = 3;
+        [SerializeField] private TextMeshProUGUI _countdownText;
         [SerializeField] private int _titleSceneIndex = 0;
         private float _roundTimeRemaining;
+        private float _countdownTimeRemaining;
         public bool GameRunning;
         public bool GameIsOver = false;
         public float GameOverDelay = 2f;
@@ -34,6 +39,7 @@ namespace UI
         // Start is called before the first frame update
         void Start()
         {
+            Instance = this;
             SetupRound();
             AudioSource listener = gameObject.AddComponent<AudioSource>();
             listener.clip = backgroundClip;
@@ -43,17 +49,31 @@ namespace UI
 
         private void SetupRound()
         {
-            GameRunning = true;
             _gameOnObjects.SetActive(true);
             _gameOverObjects.SetActive(false);
             Time.timeScale = 1.0f;
             _roundTimeRemaining = _roundTimeLimit;
+            _countdownTimeRemaining = _countdownTime;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (!GameRunning) return;
+            if (!GameRunning)
+            {
+                if (_countdownTimeRemaining > 0)
+                {
+                    _countdownText.gameObject.SetActive(true);
+                    _countdownTimeRemaining -= Time.deltaTime;
+                    _countdownText.text = ((int)_countdownTimeRemaining).ToString();
+                }
+                else
+                {
+                    _countdownText.gameObject.SetActive(false);
+                    GameRunning = true;
+                }
+                return;
+            }
 
             if (GameIsOver)
             {

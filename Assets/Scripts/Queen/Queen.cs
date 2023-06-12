@@ -1,4 +1,5 @@
 using Team;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Worker;
@@ -79,6 +80,8 @@ namespace  AntQueen
 
         void Update()
         {
+            if (!GameplayScreenView.Instance.GameRunning)
+                return;
             UpdateCooldowns();
             HandleMovement();
             HandleTarget();
