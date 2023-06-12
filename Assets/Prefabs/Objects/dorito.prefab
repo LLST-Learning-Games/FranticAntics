@@ -116,7 +116,7 @@ MonoBehaviour:
   MinAssignedAntsForPickup: 5
   AntsAssigned: []
   AssignmentWaitDistance: 2
-  SpeedMultiplier: 1
+  SpeedMultiplier: 0.5
   SizeFromResourcesRemaining:
     serializedVersion: 2
     m_Curve: []
