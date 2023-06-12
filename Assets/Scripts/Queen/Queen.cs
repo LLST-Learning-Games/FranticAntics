@@ -26,7 +26,8 @@ namespace  AntQueen
 
         [Header("Tunables")]
         [SerializeField] private float _speed = 2f;
-        [SerializeField] private float _antSpawnStartDelayTime = 0.2f;
+        [SerializeField] private float _antSpawnStartPrimaryDelayTime = 0.2f;
+        [SerializeField] private float _antSpawnStartSecondaryDelayTime = 0.2f;
         [SerializeField] private float _antSpawnCooldownTime = 0.5f;
         [SerializeField] private float _sendAntMovementPauseCooldownTime = 0.5f;
         [SerializeField] private float _sendAntCooldownTime = 0.2f;
@@ -73,7 +74,7 @@ namespace  AntQueen
             _antSpawnCooldown = _antSpawnCooldownTime;
             _sendAntCooldown = _sendAntCooldownTime;
             _sendAntMovementPauseCooldown = -1;
-            _antSpawnStartDelay = _antSpawnStartDelayTime;
+            _antSpawnStartDelay = _antSpawnStartPrimaryDelayTime;
         }
 
         void Update()
@@ -184,7 +185,7 @@ namespace  AntQueen
             if (!spawnButtonPressed)
             {
                 _spawnDelayParticleLoopingObject.SetActive(false);
-                _antSpawnStartDelay = _antSpawnStartDelayTime;
+                _antSpawnStartDelay = _antSpawnStartPrimaryDelayTime;
                 return;
             }
             
@@ -201,7 +202,7 @@ namespace  AntQueen
                 return;
             
             SpawnAntEgg();
-            _antSpawnStartDelay = _antSpawnStartDelayTime;
+            _antSpawnStartDelay = _antSpawnStartSecondaryDelayTime;
             _antSpawnCooldown = _antSpawnCooldownTime;
             TeamController.Nectar -= TeamController.AntNectarCost;
         }
@@ -216,9 +217,14 @@ namespace  AntQueen
             Debug.Log($"Laying ant now!");
             
             var newEgg = Instantiate(_eggPrefab, transform.position, Quaternion.identity);
-            Vector3 spawnTarget = transform.TransformPoint(Quaternion.Inverse(_playerModel.rotation) * Vector3.one);
-            spawnTarget.y = 0;
+            Vector3 spawnTarget = transform.TransformPoint(RandomPointOnCircleEdge(1));
             newEgg.Initialize(spawnTarget, TeamController);
+        }
+        
+        private Vector3 RandomPointOnCircleEdge(float radius)
+        {
+            var vector2 = Random.insideUnitCircle.normalized * radius;
+            return new Vector3(vector2.x, 0, vector2.y);
         }
 
         private Vector2 GetStickInput(string stick, int controller)
