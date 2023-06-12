@@ -16,7 +16,7 @@ namespace Worker.State
 
         private bool _waitingForEnoughToCollect;
         private bool _itemCollected;
-        private float _resourcesCollected;
+        [SerializeField] private float _resourcesCollected;
         
         public override void Activate()
         {
@@ -114,7 +114,17 @@ namespace Worker.State
                         _collectedPiece.transform.SetParent(null);
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
-                        TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
+
+                        float resources = 0;
+                        foreach (var ant in TargetCollectable.AntsAssigned)
+                        {
+                            if (ant.GetCurrentStateController() is WorkerCollectState state)
+                            {
+                                resources += state._resourcesCollected;
+                                state._resourcesCollected = 0;
+                            }
+                        }
+                        TargetCollectable.Consume(_workerAntController.TeamController, resources);
 
                         _workerAntController.Whistle(Vector3.zero);
                     }
