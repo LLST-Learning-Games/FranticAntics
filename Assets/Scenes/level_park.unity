@@ -9121,6 +9121,21 @@ PrefabInstance:
       objectReference: {fileID: 820649866}
     - target: {fileID: 4018812734956627795, guid: a2a160dc6b64e884faa135aa0502443b,
         type: 3}
+      propertyPath: WorkerAntColor.b
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018812734956627795, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
+      propertyPath: WorkerAntColor.g
+      value: 0.59594804
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018812734956627795, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
+      propertyPath: WorkerAntColor.r
+      value: 0.55678177
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018812734956627795, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
       propertyPath: NectarGainPerSecond
       value: 0.5
       objectReference: {fileID: 0}
@@ -9129,6 +9144,21 @@ PrefabInstance:
       propertyPath: Colony
       value: 
       objectReference: {fileID: 1307028651}
+    - target: {fileID: 4018812735532630383, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
+      propertyPath: WorkerAntColor.b
+      value: 0.46242437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018812735532630383, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
+      propertyPath: WorkerAntColor.g
+      value: 0.46242437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018812735532630383, guid: a2a160dc6b64e884faa135aa0502443b,
+        type: 3}
+      propertyPath: WorkerAntColor.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
     - target: {fileID: 4018812735532630383, guid: a2a160dc6b64e884faa135aa0502443b,
         type: 3}
       propertyPath: NectarGainPerSecond
