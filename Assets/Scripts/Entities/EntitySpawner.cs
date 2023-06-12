@@ -23,7 +23,7 @@ public class EntitySpawner : MonoBehaviour
     private int spawnCount = 0;
     
     private float secondsUntilNextSpawn;
-    private List<GameObject> activeEntities = new List<GameObject>();
+    private List<SpawnableEntitiy> activeEntities = new List<SpawnableEntitiy>();
     
     private void Start()
     {
@@ -60,9 +60,9 @@ public class EntitySpawner : MonoBehaviour
     {
         for (int i = 0; i < activeEntities.Count; ++i)
         {
-            GameObject entity = activeEntities[i];
-
-            if (!entity)
+            SpawnableEntitiy entity = activeEntities[i];
+            
+            if (entity is null || entity.IsConsumed())
             {
                 activeEntities.RemoveAt(i--);
                 
@@ -126,7 +126,7 @@ public class EntitySpawner : MonoBehaviour
         
         if (!spawnOnMe)
             obj.transform.SetParent(transform.parent, true);
-        activeEntities.Add(obj);
+        activeEntities.Add(spawnableEntity);
 
 
 

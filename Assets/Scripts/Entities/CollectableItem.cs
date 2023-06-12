@@ -31,10 +31,12 @@ namespace Entities
         [Space]
         public float ResourcesRemaining;
 
-        [HideInInspector] public bool ItemCollected;
+        [HideInInspector] public bool ItemCollected;   // some ant picked it up
         private float initialScale;
 
         public virtual bool CanCollect => !ItemCollected && ResourcesRemaining > 0f;
+
+        [HideInInspector] public bool ItemConsumed = false;  // reached base, for entity spawner for now
 
         protected virtual void Start()
         {
@@ -88,6 +90,8 @@ namespace Entities
 
         public virtual void Consume(TeamController teamController, float resourcesPickedUp)
         {
+            ItemConsumed = true;
+            
             switch (Resource)
             {
                 case Resource.Score:
@@ -104,7 +108,7 @@ namespace Entities
             {
                 ant.Whistle(Vector3.zero);
             }
-
+            
             AntsAssigned.Clear();
         }
 
