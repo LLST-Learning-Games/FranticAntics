@@ -19,7 +19,7 @@ public class CreditsScroller : MonoBehaviour
     {
         float distanceTravelled = scrollSpeed * Time.deltaTime;
         float textHeight = textTransform.rect.height;
-        textHeight += (textTransform.parent as RectTransform).rect.height;
+        textHeight += (textTransform.parent as RectTransform).rect.height; 
 
         Vector3 position = textTransform.anchoredPosition;
         position.y += distanceTravelled;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2792878531296112472}
   - component: {fileID: 4690620848138651873}
   - component: {fileID: 8261319372830280450}
+  - component: {fileID: 4308551573593396104}
   m_Layer: 6
   m_Name: dorito
   m_TagString: collectable
@@ -115,7 +116,7 @@ MonoBehaviour:
   MinAssignedAntsForPickup: 5
   AntsAssigned: []
   AssignmentWaitDistance: 2
-  SpeedMultiplier: 1
+  SpeedMultiplier: 0.3
   SizeFromResourcesRemaining:
     serializedVersion: 2
     m_Curve: []
@@ -128,3 +129,19 @@ MonoBehaviour:
   _minedPiecePrefab: {fileID: 0}
   ResourcesRemaining: 0
   ItemCollected: 0
+--- !u!114 &4308551573593396104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450313214207954573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff1cee03a7eb8341a14764b7691dc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingPos: {x: 0, y: 0, z: 0}
+  _endingPos: {x: 0, y: 0, z: 0}
+  _groundLevelForModel: 0.5
+  dropTime: 1.5

@@ -12,8 +12,11 @@ namespace Worker.State
         [SerializeField] private float _searchIdleTime = 2f;
 
         [SerializeField] private float _searchDistance = 10f;
+        [SerializeField] private float _autoTurnTime = 10f;
 
         private Tween _waitingDelayTween;
+        private Tween _autoTurnBack;
+        
         private Vector3 _searchPosition;
 
         private NavMeshAgent _navMeshAgent;
@@ -28,6 +31,8 @@ namespace Worker.State
             var queen = _workerAntController.TeamController.Queen;
             _searchPosition = queen.transform.position + queen.GetForward().normalized * _searchDistance;
             _workerAntController.SetDestination(_searchPosition);
+
+            _autoTurnBack = DOVirtual.DelayedCall(_autoTurnTime, OnPathCompleted);
         }
 
         public override void Deactivate()
@@ -35,6 +40,7 @@ namespace Worker.State
             base.Deactivate();
 
             _waitingDelayTween?.Kill();
+            _autoTurnBack?.Kill();
             _waitingDelayTween = null;
         }
 
@@ -44,11 +50,6 @@ namespace Worker.State
 
             if(_waitingDelayTween == null && Vector3.Distance(_searchPosition, transform.position) <= 1)
                 OnPathCompleted();
-            
-            if(_waitingDelayTween == null && !_navMeshAgent.hasPath)
-            {
-                _waitingDelayTween = DOVirtual.DelayedCall(3, OnPathCompleted);
-            }
         }
 
         private void OnPathCompleted()

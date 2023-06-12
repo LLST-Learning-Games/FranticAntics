@@ -98,5 +98,10 @@ namespace Worker
             
             enabled = false;
         }
+
+        public void MultiplySpeed(float multiplier)
+        {
+            _navMeshAgent.speed = _workerAntController.Statistics.MovementSpeed * multiplier;
+        }
     }
 }
