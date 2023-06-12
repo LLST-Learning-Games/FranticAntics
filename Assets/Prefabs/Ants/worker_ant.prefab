@@ -936,6 +936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchIdleTime: 2
   _searchDistance: 10
+  _autoTurnTime: 5
 --- !u!114 &3396216706517529867
 MonoBehaviour:
   m_ObjectHideFlags: 0
