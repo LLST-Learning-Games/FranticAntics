@@ -12,6 +12,7 @@ namespace Worker.State
         [SerializeField] private float _searchIdleTime = 2f;
 
         [SerializeField] private float _searchDistance = 10f;
+        [SerializeField] private float _autoTurnTime = 10f;
 
         private Tween _waitingDelayTween;
         private Tween _autoTurnBack;
@@ -31,7 +32,7 @@ namespace Worker.State
             _searchPosition = queen.transform.position + queen.GetForward().normalized * _searchDistance;
             _workerAntController.SetDestination(_searchPosition);
 
-            _autoTurnBack = DOVirtual.DelayedCall(10, OnPathCompleted);
+            _autoTurnBack = DOVirtual.DelayedCall(_autoTurnTime, OnPathCompleted);
         }
 
         public override void Deactivate()
