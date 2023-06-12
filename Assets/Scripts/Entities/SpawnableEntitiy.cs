@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 
 public class SpawnableEntitiy : MonoBehaviour
@@ -12,6 +14,13 @@ public class SpawnableEntitiy : MonoBehaviour
 
     public float dropTime = 2f;
     private float _timelapse = 0f;
+
+    private CollectableItem _collectableItem;
+    
+    private void Start()
+    {
+        _collectableItem = gameObject.GetComponent<CollectableItem>();
+    }
 
     public void Initialise(Vector3 startingPos, Vector3 endingPos)
     {
@@ -40,5 +49,10 @@ public class SpawnableEntitiy : MonoBehaviour
             //we are close to our destination so do something
             this.enabled = false;
         }
+    }
+
+    public bool IsConsumed()
+    {
+        return _collectableItem == null || _collectableItem.ItemConsumed;
     }
 }
