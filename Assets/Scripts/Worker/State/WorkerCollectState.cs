@@ -115,16 +115,24 @@ namespace Worker.State
                         _collectedPiece.transform.DOScale(Vector3.zero, .2f);
                         _collectedPiece.transform.DOMove(_endDestination.position, .2f);
 
-                        float resources = 0;
-                        foreach (var ant in TargetCollectable.AntsAssigned)
+                        if(!TargetCollectable.Mineable)
                         {
-                            if (ant.GetCurrentStateController() is WorkerCollectState state)
+                            float resources = 0;
+                            foreach (var ant in TargetCollectable.AntsAssigned)
                             {
-                                resources += state._resourcesCollected;
-                                state._resourcesCollected = 0;
+                                if (ant.GetCurrentStateController() is WorkerCollectState state)
+                                {
+                                    resources += state._resourcesCollected;
+                                    state._resourcesCollected = 0;
+                                }
                             }
+
+                            TargetCollectable.Consume(_workerAntController.TeamController, resources);
                         }
-                        TargetCollectable.Consume(_workerAntController.TeamController, resources);
+                        else
+                        {
+                            TargetCollectable.Consume(_workerAntController.TeamController, _resourcesCollected);
+                        }
 
                         _workerAntController.Whistle(Vector3.zero);
                     }
